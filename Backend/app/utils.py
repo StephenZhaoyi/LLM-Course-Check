@@ -5,7 +5,7 @@ from email.mime.multipart import MIMEMultipart
 def send_email(to_email, subject, message):
     """发送邮件"""
     sender_email = "tr1173309602@gmail.com"
-    sender_password = "tzvgdebdytjkoeka"
+    sender_password = "xxx"
 
     try:
         # 配置 SMTP 服务
