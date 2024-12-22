@@ -4,16 +4,15 @@ import { match } from "ts-pattern";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import Pagination from "../components/Pagination/Pagination";
 
-// generate real timestamps for mock data
 const generateMockApplicants = (count) => {
 	const applicants = [];
 
 	for (let i = 0; i < count; i++) {
-		const currentTime = new Date(Date.now() - i * 3600 * 1000 * 12); // Subtract 'i' hours
+		const currentTime = new Date(Date.now() - i * 3600 * 1000 * 12);
 
 		applicants.push({
 			applicationNumber: `${Math.floor(Math.random() * 1e15)}`,
-			applicantName: `Applicant ${String.fromCharCode(65 + i)}`, // A, B, C...
+			applicantName: `Applicant ${String.fromCharCode(65 + i)}`,
 			submissionTimestamp: currentTime.toISOString(),
 			nationality: "Eldia Empire",
 			score: Math.floor(Math.random() * 100),
@@ -49,7 +48,6 @@ export default function ApplicantListPage() {
 	const itemsPerPage = 15;
 	const [currentPage, setCurrentPage] = useState(1);
 
-	// sort applicants by score in descending order
 	const sortedApplicants = [...applicantsData].sort(
 		(a, b) => b.score - a.score
 	);
@@ -60,7 +58,7 @@ export default function ApplicantListPage() {
 		currentPage * itemsPerPage
 	);
 
-	// determine styles of score based on the number
+	// ts-pattern to match score ranges
 	const getScoreStyles = (score) => {
 		return match(score)
 			.when(
@@ -91,7 +89,6 @@ export default function ApplicantListPage() {
 				</div>
 
 				<div className="bg-white rounded-lg overflow-hidden">
-					{/* Header */}
 					<div className="grid grid-cols-[1.5fr_1.5fr_1.5fr_1fr_1.5fr_0.8fr_0.4fr] gap-4 bg-gray-100 text-title-gray font-semibold uppercase text-sm px-2 py-3">
 						<div className="text-center">Application No.</div>
 						<div className="text-center">Applicant Name</div>
@@ -102,7 +99,6 @@ export default function ApplicantListPage() {
 						<div className="text-center"> </div>
 					</div>
 
-					{/* Content Rows */}
 					<div className="overflow-y-auto max-h-[63vh]">
 						{currentApplicants.map((applicant, index) => {
 							const { textColor, bgColor } = getScoreStyles(
