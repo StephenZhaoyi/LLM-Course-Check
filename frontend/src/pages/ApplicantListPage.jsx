@@ -3,9 +3,18 @@ import Layout from "../components/Layout/Layout";
 import { match } from "ts-pattern";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import Pagination from "../components/Pagination/Pagination";
+import { Link } from "react-router-dom";
 
 const generateMockApplicants = (count) => {
-	const applicants = [];
+	const applicants = [
+		{
+			applicationNumber: "495090106416195",
+			applicantName: "Teresa NiuB 🐮🍺",
+			submissionTimestamp: new Date().toISOString(),
+			nationality: "Eldia Empire",
+			score: 99,
+		},
+	];
 
 	for (let i = 0; i < count; i++) {
 		const currentTime = new Date(Date.now() - i * 3600 * 1000 * 12);
@@ -137,7 +146,11 @@ export default function ApplicantListPage() {
 										</span>
 									</div>
 									<div className="flex justify-center">
-										<HiOutlineDotsVertical />
+										<Link
+											to={`/applicant/${applicant.applicationNumber}`}
+										>
+											<HiOutlineDotsVertical className="cursor-pointer hover:text-tum-blue" />
+										</Link>
 									</div>
 								</div>
 							);

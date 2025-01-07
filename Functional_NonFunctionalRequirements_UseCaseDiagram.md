@@ -61,3 +61,7 @@
    - The system should comply with relevant data protection regulations, such as GDPR, ensuring that applicants’ personal data is handled responsibly.
    - The evaluation and recommendation criteria should align with the Technical University of Munich’s admission standards and policies.
 
+## Use Case Diagram
+   This is the Use Case Diagram for our software. 
+   
+   ![Use Case Diagram shows here](UseCaseDiagram.jpg)

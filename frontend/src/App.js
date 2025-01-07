@@ -1,5 +1,6 @@
 import React from "react";
 import ApplicantListPage from "./pages/ApplicantListPage";
+import ApplicantDetailPage from "./pages/ApplicantDetailPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Layout/Navbar";
 import { NavLink } from "react-router-dom";
@@ -31,6 +32,7 @@ function App() {
 					}
 				/>
 				<Route path="/applicants" element={<ApplicantListPage />} />
+				<Route path="/applicant/:id" element={<ApplicantDetailPage />} />
 			</Routes>
 		</Router>
 	);
