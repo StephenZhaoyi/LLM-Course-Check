@@ -1,21 +1,19 @@
 import React, { useState } from "react";
-import TUMLogo from "../assets/tum-logo.svg"; // 确保路径正确
+import TUMLogo from "../assets/tum-logo.svg";
 
 const LoginPage = () => {
     const [email, setEmail] = useState("");
     const [code, setCode] = useState("");
     const [error, setError] = useState("");
-    const [step, setStep] = useState(1); // 1: 输入邮箱, 2: 输入验证码
+    const [step, setStep] = useState(1);
 
     const sendVerificationCode = async () => {
-        // 邮箱格式验证
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             setError("Invalid email format. Please try again!");
             return;
         }
-
-        setError(""); // 清除之前的错误
+        setError("");
 
         try {
             const response = await fetch("http://localhost:5000/api/send-code", {
@@ -23,14 +21,12 @@ const LoginPage = () => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email }),
             });
-
             if (!response.ok) {
                 const data = await response.json();
                 throw new Error(data.message || "Failed to send verification code.");
             }
-
             alert("Verification code sent to your email!");
-            setStep(2); // 跳转到验证码输入步骤
+            setStep(2);
         } catch (err) {
             console.error(err);
             setError(err.message || "Failed to send verification code.");
@@ -42,7 +38,6 @@ const LoginPage = () => {
             setError("Please enter the verification code.");
             return;
         }
-
         setError("");
 
         try {
@@ -51,14 +46,12 @@ const LoginPage = () => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, code }),
             });
-
             if (!response.ok) {
                 const data = await response.json();
                 throw new Error(data.message || "Verification failed.");
             }
-
             alert("Login successful!");
-            // 跳转到主页或执行后续操作
+            // 跳转到其他页面
         } catch (err) {
             console.error(err);
             setError(err.message || "Verification failed.");
@@ -66,76 +59,22 @@ const LoginPage = () => {
     };
 
     return (
-        <div
-            className="relative flex justify-center items-center min-h-screen"
-            style={{
-                backgroundColor: "#f5f5f5", // 设置页面背景色
-            }}
-        >
-            {/* 左上角 TUM Logo */}
-            <div
-                style={{
-                    position: "absolute",
-                    top: "10px",
-                    left: "30px",
-                    zIndex: 100, // 确保 Logo 在最上层
-                }}
-            >
-                <img
-                    src={TUMLogo}
-                    alt="TUM Logo"
-                    style={{
-                        width: "50px", // Logo 宽度
-                        height: "50px", // Logo 高度
-                    }}
-                />
+        <div className="min-h-screen flex items-center justify-center bg-[#f5f5f5]">
+            {/* 左上角 Logo，可去掉 */}
+            <div className="absolute top-4 left-6 z-10">
+                <img src={TUMLogo} alt="TUM Logo" className="w-12 h-12" />
             </div>
 
-            {/* 1334x800 主容器 */}
-            <div
-                className="relative"
-                style={{
-                    width: "1334px", // 固定宽度
-                    height: "800px", // 固定高度
-                    backgroundColor: "#ffffff", // 设置主容器背景色
-                    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)", // 添加阴影
-                    borderRadius: "8px", // 可选：主容器圆角
-                    display: "flex", // 子元素 Flex 布局
-                    overflow: "hidden", // 防止内容溢出
-                }}
-            >
-                {/* 左侧区域 */}
-                <div
-                    className="flex-1 relative"
-                    style={{ backgroundColor: "#E0E0E0", height: "100%" }}
-                >
-                    <h1
-                        className="absolute font-bold"
-                        style={{
-                            fontSize: "128px",
-                            color: "#0284C7",
-                            top: "40px",
-                            left: "40px",
-                            textShadow: "10px 10px 20px rgba(0, 0, 0, 0.25)",
-                        }}
-                    >
+            {/* 固定像素宽高，居中容器 */}
+            <div className="relative w-[1200px] h-[720px] bg-white shadow-md rounded-lg flex overflow-hidden">
+                <div className="flex-1 bg-[#E0E0E0] relative">
+                    <h1 className="absolute font-bold text-[8rem] text-[#0284C7] top-10 left-10 drop-shadow-lg">
                         TUM
                     </h1>
-                    <h2
-                        className="absolute font-bold"
-                        style={{
-                            fontSize: "96px",
-                            color: "#FFFFFF",
-                            top: "303px",
-                            left: "40px",
-                            textShadow: "10px 10px 20px rgba(0, 0, 0, 0.25)",
-                        }}
-                    >
+                    <h2 className="absolute font-bold text-[6rem] text-white top-[19rem] left-10 drop-shadow-lg">
                         Courses Checker
                     </h2>
                 </div>
-
-                {/* 右侧区域 */}
                 <div className="flex-1 flex flex-col justify-center items-center bg-white px-8">
                     <div className="w-full max-w-md text-center">
                         {step === 1 && (
@@ -165,7 +104,6 @@ const LoginPage = () => {
                                 </button>
                             </>
                         )}
-
                         {step === 2 && (
                             <>
                                 <h2 className="text-3xl font-semibold mt-6 text-gray-800">
