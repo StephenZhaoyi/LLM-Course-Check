@@ -51,7 +51,7 @@ const LoginPage = () => {
                 throw new Error(data.message || "Verification failed.");
             }
             alert("Login successful!");
-            // 跳转到其他页面
+            // Redirect to another page
         } catch (err) {
             console.error(err);
             setError(err.message || "Verification failed.");
@@ -60,12 +60,12 @@ const LoginPage = () => {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-[#f5f5f5]">
-            {/* 左上角 Logo，可去掉 */}
+            {/* Top left logo, can be removed */}
             <div className="absolute top-4 left-6 z-10">
                 <img src={TUMLogo} alt="TUM Logo" className="w-12 h-12" />
             </div>
 
-            {/* 固定像素宽高，居中容器 */}
+            {/* Centered container with fixed width and height */}
             <div className="relative w-[1200px] h-[720px] bg-white shadow-md rounded-lg flex overflow-hidden">
                 <div className="flex-1 bg-[#E0E0E0] relative">
                     <h1 className="absolute font-bold text-[8rem] text-[#0284C7] top-10 left-10 drop-shadow-lg">
