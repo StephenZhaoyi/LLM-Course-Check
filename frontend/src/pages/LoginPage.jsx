@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import TUMLogo from "../assets/tum-logo.svg";
+import TUMLogo from "../components/Logo/TUMLogo";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
     const [email, setEmail] = useState("");
     const [code, setCode] = useState("");
     const [error, setError] = useState("");
     const [step, setStep] = useState(1);
+    const navigate = useNavigate();
 
     const sendVerificationCode = async () => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -52,6 +54,7 @@ const LoginPage = () => {
             }
             alert("Login successful!");
             // Redirect to another page
+            navigate("/applicants");
         } catch (err) {
             console.error(err);
             setError(err.message || "Verification failed.");
@@ -62,7 +65,7 @@ const LoginPage = () => {
         <div className="min-h-screen flex items-center justify-center bg-[#f5f5f5]">
             {/* Top left logo, can be removed */}
             <div className="absolute top-4 left-6 z-10">
-                <img src={TUMLogo} alt="TUM Logo" className="w-12 h-12" />
+                <TUMLogo className="w-12 h-12" />
             </div>
 
             {/* Centered container with fixed width and height */}
