@@ -2,9 +2,13 @@ import time
 from openai import OpenAI
 import json
 import re
+from dotenv import load_dotenv
+import os
 
 # Initialize OpenAI client
-client = OpenAI(api_key="API KEY HERE")
+load_dotenv("APIKey.env")
+api_key_1 = os.getenv("API_KEY")
+client = OpenAI(api_key=api_key_1)
 
 file2 = client.files.create(
     file = open(r"backend\app\data\example_1_course_catalogue_LMU_BSc_Informatics.pdf","rb"),
@@ -44,18 +48,24 @@ my_updated_assistant = client.beta.assistants.update(
 thread = client.beta.threads.create()
 
 prompt = f"""
-Please use the JSON_EXCEL {json_text_excel} I provided, and the students' module handbook I uploaded as the PDF, and the give the similarity in the marks parts of Json. Please use following grading criteria:
+Please use the JSON_EXCEL {json_text_excel} I provided, and the students' module handbook I uploaded as the PDF, 
+and the give the similarity in the marks parts of Json. Please use following grading criteria:
 Case 1: Applicant ect < TUM ects
-    Similarity percentage * TUM_course_ect * Applicant_ect / TUM ects
+    deduction_recommendation = TUM_course_ect - (Similarity percentage * TUM_course_ect * Applicant_ect / TUM ects)
 
 Case 2: Applicant ect >= TUM ects
-    Similarity percentage * TUM_course_ect
-To compare the similarity, you should compare the TUM's module handbook with JSON_HANDBOOK {json_text_tum} and the uploaded PDF.
+    deduction_recommendation = TUM_course_ect - Similarity percentage * TUM_course_ect
+To compare the similarity, you should compare the TUM's module handbook with JSON_HANDBOOK {json_text_tum} and the 
+uploaded PDF.
 For the output, please use JSON_Evaluation {json_text_evaluation} as the template.
-In the JSON_Evaluation in explanation_recommendation part, you will give reasons why the course's mark is deduced in this format applicant's course name: reason for deduction. If there are several
-applicant's course, separate them with a semicolon. You need to included the detailed reason for each course, which competencies
-default course requires but applicant's course do not have if you decide to deduce the point, and list competencies that both default
-course have and students' course have when you decide to not deduce any point for example. 
+In the JSON_Evaluation in explanation_recommendation part, you will give reasons why the course's mark is deduced 
+following this template:
+- If you decide to not deduce anything:
+"The applicant's course covers [list of competencies that TUM's course and applicant's course match]"
+- If you decide to reduce the point:
+"The applicant's course lack [list of competencies that TUM's course that applicant's course lack]"
+You should not add non natural language (such as course code) inside the 
+explanation_recommendation.
 You should write json file inside this box:
 <json>
 JSON here
