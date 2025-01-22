@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import TUMLogo from "../assets/tum-logo.svg"; // 确保路径正确
+import TUMLogo from "../assets/tum-logo.svg"; // Ensure the path is correct
 
 const LoginPage = () => {
     const [email, setEmail] = useState("");
@@ -19,42 +19,42 @@ const LoginPage = () => {
         <div
             className="relative flex justify-center items-center min-h-screen"
             style={{
-                backgroundColor: "#f5f5f5", // 设置页面背景色
+                backgroundColor: "#f5f5f5", // Set page background color
             }}
         >
-            {/* 左上角 TUM Logo */}
+            {/* Top-left TUM Logo */}
             <div
                 style={{
                     position: "absolute",
                     top: "10px",
                     left: "30px",
-                    zIndex: 100, // 确保 Logo 在最上层
+                    zIndex: 100, // Ensure the logo is on the top layer
                 }}
             >
                 <img
                     src={TUMLogo}
                     alt="TUM Logo"
                     style={{
-                        width: "50px", // Logo 宽度
-                        height: "50px", // Logo 高度
+                        width: "50px", // Logo width
+                        height: "50px", // Logo height
                     }}
                 />
             </div>
 
-            {/* 1334x800 主容器 */}
+            {/* Main container (1334x800) */}
             <div
                 className="relative"
                 style={{
-                    width: "1334px", // 固定宽度
-                    height: "800px", // 固定高度
-                    backgroundColor: "#ffffff", // 设置主容器背景色
-                    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)", // 添加阴影
-                    borderRadius: "8px", // 可选：主容器圆角
-                    display: "flex", // 子元素 Flex 布局
-                    overflow: "hidden", // 防止内容溢出
+                    width: "1334px", // Fixed width
+                    height: "800px", // Fixed height
+                    backgroundColor: "#ffffff", // Set container background color
+                    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)", // Add shadow
+                    borderRadius: "8px", // Optional: Rounded corners
+                    display: "flex", // Flex layout for child elements
+                    overflow: "hidden", // Prevent content overflow
                 }}
             >
-                {/* 左侧区域 */}
+                {/* Left section */}
                 <div
                     className="flex-1 relative"
                     style={{ backgroundColor: "#E0E0E0", height: "100%" }}
@@ -85,7 +85,7 @@ const LoginPage = () => {
                     </h2>
                 </div>
 
-                {/* 右侧区域 */}
+                {/* Right section */}
                 <div className="flex-1 flex flex-col justify-center items-center bg-white px-8">
                     <div className="w-full max-w-md text-center">
                         <h2 className="text-3xl font-semibold mt-6 text-gray-800">
