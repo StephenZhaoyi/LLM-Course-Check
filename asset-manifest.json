@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/LLM-Course-Check/static/css/main.18f042eb.css",
+    "main.js": "/LLM-Course-Check/static/js/main.a5cd7e94.js",
+    "static/media/tum-logo.svg": "/LLM-Course-Check/static/media/tum-logo.fae0dae3f360c7d7e74b91bd619f4098.svg",
+    "index.html": "/LLM-Course-Check/index.html",
+    "main.18f042eb.css.map": "/LLM-Course-Check/static/css/main.18f042eb.css.map",
+    "main.a5cd7e94.js.map": "/LLM-Course-Check/static/js/main.a5cd7e94.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.18f042eb.css",
+    "static/js/main.a5cd7e94.js"
+  ]
+}
