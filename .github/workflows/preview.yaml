@@ -1,14 +1,12 @@
-name: Production Deployment
+name: Preview Deployment
 
 on:
-  push:
-    branches:
-      - main
+  pull_request:
     paths:
       - 'frontend/**'
 
 jobs:
-  production-deploy:
+  preview-deploy:
     runs-on: ubuntu-latest
 
     defaults:
@@ -22,7 +20,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: '16' # Use the Node.js version required by your project
           cache: 'npm'
 
       - name: Install dependencies
@@ -31,9 +29,9 @@ jobs:
       - name: Build application
         run: npm run build
 
-      - name: Deploy to Vercel (Production)
+      - name: Deploy to Vercel (Preview)
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
           npm install -g vercel
-          vercel --prod --token=$VERCEL_TOKEN --scope personal --yes
+          vercel --prebuilt --token=$VERCEL_TOKEN --scope personal --yes
