@@ -3,7 +3,7 @@ name: Preview Deployment
 on:
   pull_request:
     paths:
-      - 'frontend/**'
+      - '/frontend/**'
 
 jobs:
   preview-deploy:
