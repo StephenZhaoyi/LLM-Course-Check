@@ -3,7 +3,8 @@ name: Preview Deployment
 on:
   pull_request:
     paths:
-      - '/frontend/**'
+      - 'frontend/**'
+      - '.github/workflows/**'
 
 jobs:
   preview-deploy:
