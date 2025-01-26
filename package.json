@@ -1,0 +1,8 @@
+{
+  "name": "LLM-Course-Check",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/StephenZhaoyi/LLM-Course-Check.git",
+  "author": "8arry <1173309602@qq.com>",
+  "license": "MIT"
+}
