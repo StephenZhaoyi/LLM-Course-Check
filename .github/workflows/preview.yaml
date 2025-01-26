@@ -17,11 +17,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18' # Ensure compatibility with dependencies
-
       - name: Install Vercel CLI
         run: yarn global add vercel@latest
 
