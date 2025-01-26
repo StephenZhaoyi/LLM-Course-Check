@@ -16,6 +16,9 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+      
+      - name: Check Shell
+        run: which sh
 
       - name: Install Vercel CLI
         run: yarn global add vercel@latest
@@ -25,7 +28,21 @@ jobs:
 
       - name: Install Dependencies
         run: yarn install
-
+      
+      - name: Fix Permissions
+        run: chmod +x node_modules/.bin/* || true
+      
+      - name: Debug Environment
+        run: |
+          echo "Node Version:"
+          node -v
+          echo "NPM Version:"
+          npm -v
+          echo "Yarn Version:"
+          yarn -v || echo "Yarn not installed"
+          echo "PATH:"
+          echo $PATH
+      
       - name: Build Project Artifacts
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
 
