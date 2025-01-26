@@ -30,9 +30,12 @@ jobs:
       - name: Build application
         run: npm run build
 
+      - name: Suppress npm warnings
+        run: npm config set loglevel warn
+
       - name: Deploy to Vercel (Preview)
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
-          npm install -g vercel
+          npm install -g vercel@39.3.0
           vercel --prebuilt --token=$VERCEL_TOKEN --scope personal --yes
