@@ -4,58 +4,21 @@ import { match } from "ts-pattern";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import Pagination from "../components/Pagination/Pagination";
 import { Link } from "react-router-dom";
-
-const generateMockApplicants = (count) => {
-	const applicants = [
-		{
-			applicationNumber: "495090106416195",
-			applicantName: "Teresa NiuB 🐮🍺",
-			submissionTimestamp: new Date().toISOString(),
-			nationality: "Eldia Empire",
-			score: 99,
-		},
-	];
-
-	for (let i = 0; i < count; i++) {
-		const currentTime = new Date(Date.now() - i * 3600 * 1000 * 12);
-
-		applicants.push({
-			applicationNumber: `${Math.floor(Math.random() * 1e15)}`,
-			applicantName: `Applicant ${String.fromCharCode(65 + i)}`,
-			submissionTimestamp: currentTime.toISOString(),
-			nationality: "Eldia Empire",
-			score: Math.floor(Math.random() * 100),
-		});
-	}
-
-	return applicants;
-};
-
-const applicantsData = generateMockApplicants(129);
-
-const formatDate = (timestamp) => {
-	const date = new Date(timestamp);
-
-	// format date: "Feb 5, 2024"
-	const submissionDate = new Intl.DateTimeFormat("en-US", {
-		month: "short",
-		day: "numeric",
-		year: "numeric",
-	}).format(date);
-
-	// format time: "02:00 PM"
-	const submissionTime = new Intl.DateTimeFormat("en-US", {
-		hour: "numeric",
-		minute: "numeric",
-		hour12: true,
-	}).format(date);
-
-	return { submissionDate, submissionTime };
-};
+import mockData from "./mockdata";
 
 export default function ApplicantListPage() {
 	const itemsPerPage = 15;
 	const [currentPage, setCurrentPage] = useState(1);
+
+	const applicantsData = mockData.applicants.map((applicant) => ({
+		applicationNumber: applicant.applicantId,
+		applicantName: `${applicant.firstName} ${applicant.lastName}`,
+		submissionDate: applicant.submissionDate,
+		submissionTime: applicant.submissionTime,
+		applicantDateOfBirth: applicant.dateOfBirth,
+		nationality: applicant.nationality,
+		score: Math.floor(Math.random() * 100),
+	}));
 
 	const sortedApplicants = [...applicantsData].sort(
 		(a, b) => b.score - a.score
@@ -98,7 +61,7 @@ export default function ApplicantListPage() {
 				</div>
 
 				<div className="bg-white rounded-lg overflow-hidden">
-					<div className="grid grid-cols-[1.5fr_1.5fr_1.5fr_1fr_1.5fr_0.8fr_0.4fr] gap-4 bg-gray-100 text-title-gray font-semibold uppercase text-sm px-2 py-3">
+					<div className="grid grid-cols-[1.1fr_1.5fr_1.5fr_1fr_1.5fr_0.8fr_0.4fr] gap-4 bg-gray-100 text-title-gray font-semibold uppercase text-sm px-2 py-3">
 						<div className="text-center">Application No.</div>
 						<div className="text-center">Applicant Name</div>
 						<div className="text-center">Submission Date</div>
@@ -113,15 +76,11 @@ export default function ApplicantListPage() {
 							const { textColor, bgColor } = getScoreStyles(
 								applicant.score
 							);
-							const {
-								submissionDate,
-								submissionTime,
-							} = formatDate(applicant.submissionTimestamp);
 
 							return (
 								<div
 									key={index}
-									className="grid grid-cols-[1.5fr_1.5fr_1.5fr_1fr_1.5fr_0.8fr_0.4fr] gap-4 border-b px-2 py-2 items-center hover:bg-gray-50 transition duration-200 text-sm overflow-scroll"
+									className="grid grid-cols-[1.1fr_1.5fr_1.5fr_1fr_1.5fr_0.8fr_0.4fr] gap-4 border-b px-2 py-2 items-center hover:bg-gray-50 transition duration-200 text-sm overflow-scroll"
 								>
 									<div className="text-center">
 										{applicant.applicationNumber}
@@ -130,10 +89,10 @@ export default function ApplicantListPage() {
 										{applicant.applicantName}
 									</div>
 									<div className="text-center">
-										{submissionDate}
+										{applicant.submissionDate}
 									</div>
 									<div className="text-center">
-										{submissionTime}
+										{applicant.submissionTime}
 									</div>
 									<div className="text-center">
 										{applicant.nationality}
