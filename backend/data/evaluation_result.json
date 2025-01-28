@@ -1,0 +1,155 @@
+{
+    "defaultCourse1": {
+        "id": 1,
+        "title": "Introduction to Informatics",
+        "ects": 6,
+        "moduleCode": "INHN0001",
+        "score": 6,
+        "deduction_recommendation": 0,
+        "explanation_recommendation": "Introduction to Informatics: This module covers fundamental concepts of computer science such as algorithms, syntax, semantics, and basic programming that are included in both the TUM and applicant's courses."
+    },
+    "defaultCourse2": {
+        "id": 2,
+        "title": "Fundamentals of Programming (Exercises & Laboratory)",
+        "ects": 6,
+        "moduleCode": "INHN0002",
+        "score": 6,
+        "deduction_recommendation": 0,
+        "explanation_recommendation": "Introduction to Programming (INF-EiP): Ensures proficiency in Java or similar object-oriented programming languages, matching fundamental programming concepts covered by the TUM course\u30104:8\u2020example_1_course_catalogue_LMU_BSc_Informatics.pdf\u3011."
+    },
+    "defaultCourse3": {
+        "id": 3,
+        "title": "Introduction to Computer Organization and Technology - Computer Architecture",
+        "ects": 8,
+        "moduleCode": "INHN0003",
+        "score": 6,
+        "deduction_recommendation": 1,
+        "explanation_recommendation": "Computer Architecture (INF-RA): Applicant's course lacks depth in some advanced topics of computer architecture and optimization techniques present in TUM's course but covers fundamental system architecture concepts\u30104:2\u2020example_1_course_catalogue_LMU_BSc_Informatics.pdf\u3011."
+    },
+    "defaultCourse4": {
+        "id": 4,
+        "title": "Introduction to Software Engineering",
+        "ects": 6,
+        "moduleCode": "INHN0006",
+        "score": 6,
+        "deduction_recommendation": 0,
+        "explanation_recommendation": "Software Engineering (INF-SWT): Includes all phases of software development and essential software engineering practices aligned with TUM's course\u30104:10\u2020example_1_course_catalogue_LMU_BSc_Informatics.pdf\u3011."
+    },
+    "defaultCourse5": {
+        "id": 5,
+        "title": "Operating Systems and System Software",
+        "ects": 6,
+        "moduleCode": "INHN0007",
+        "score": 6,
+        "deduction_recommendation": 0,
+        "explanation_recommendation": "Operating Systems (INF-BS): Covers multithreading, resource management, and operating system models similarly to TUM's course\u30104:9\u2020example_1_course_catalogue_LMU_BSc_Informatics.pdf\u3011."
+    },
+    "defaultCourse6": {
+        "id": 6,
+        "title": "Fundamentals of Algorithms and Data Structures",
+        "ects": 6,
+        "moduleCode": "INHN0008",
+        "score": 6,
+        "deduction_recommendation": 0,
+        "explanation_recommendation": "Algorithms and Data Structures (INF-AlDs): Comprehensive on basic to advanced data structures and algorithms included in both courses\u30104:11\u2020example_1_course_catalogue_LMU_BSc_Informatics.pdf\u3011."
+    },
+    "defaultCourse7": {
+        "id": 7,
+        "title": "Fundamentals of Databases",
+        "ects": 6,
+        "moduleCode": "INHN0011",
+        "score": 6,
+        "deduction_recommendation": 0,
+        "explanation_recommendation": "Database Systems I (INF-DBSI): Both courses address essential relational database concepts, complex queries, and SQL usage\u30104:17\u2020example_1_course_catalogue_LMU_BSc_Informatics.pdf\u3011."
+    },
+    "defaultCourse8": {
+        "id": 8,
+        "title": "Computer Networking and IT Security",
+        "ects": 6,
+        "moduleCode": "INHN0012",
+        "score": 6,
+        "deduction_recommendation": 0,
+        "explanation_recommendation": "Computer Networks and Distributed Systems (INF-RVS): Comprehensive content covering network layers and security, similar to TUM course\u30104:13\u2020example_1_course_catalogue_LMU_BSc_Informatics.pdf\u3011."
+    },
+    "defaultCourse9": {
+        "id": 9,
+        "title": "Information Theory and Theoretical Informatics",
+        "ects": 6,
+        "moduleCode": "INHN0013",
+        "score": 6,
+        "deduction_recommendation": 0,
+        "explanation_recommendation": "Formal Languages and Complexity Theory (INF-FSK): Includes theoretical grounds of formal languages, grammars, DFA/NFA, and complexity, aligning with TUM course standards\u30104:12\u2020example_1_course_catalogue_LMU_BSc_Informatics.pdf\u3011."
+    },
+    "defaultCourse10": {
+        "id": 10,
+        "title": "Introduction to Signal Processing",
+        "ects": 6,
+        "moduleCode": "INHN0016",
+        "score": 5,
+        "deduction_recommendation": 1,
+        "explanation_recommendation": "Signal Analysis: TUM's course includes more advanced signal processing techniques not covered in the applicant's course."
+    },
+    "defaultCourse11": {
+        "id": 11,
+        "title": "Foundations of Cyber-Physical Systems",
+        "ects": 8,
+        "moduleCode": "INHN0018",
+        "score": 0,
+        "deduction_recommendation": 0,
+        "explanation_recommendation": "Applicant did not provide a relevant course for evaluation."
+    },
+    "defaultCourse12": {
+        "id": 12,
+        "title": "Enterprise Architecture Management and Reference Models",
+        "ects": 6,
+        "moduleCode": "INHN0017",
+        "score": 0,
+        "deduction_recommendation": 0,
+        "explanation_recommendation": "Applicant did not provide a relevant course for evaluation."
+    },
+    "defaultCourse13": {
+        "id": 13,
+        "title": "Business Process Management",
+        "ects": 5,
+        "moduleCode": "INHN0019",
+        "score": 5,
+        "deduction_recommendation": 0,
+        "explanation_recommendation": "Business Process Management: Both courses cover the interaction of business processes with IT, which is adequately addressed in the applicant's course."
+    },
+    "defaultCourse14": {
+        "id": 14,
+        "title": "Discrete Structures",
+        "ects": 8,
+        "moduleCode": "INHN0004",
+        "score": 6,
+        "deduction_recommendation": 1,
+        "explanation_recommendation": "Logic and Discrete Structures (INF-LDS): TUM's course has a broader scope encompassing more applications of discrete mathematics than the applicant's course\u30104:7\u2020example_1_course_catalogue_LMU_BSc_Informatics.pdf\u3011."
+    },
+    "defaultCourse15": {
+        "id": 15,
+        "title": "Linear Algebra",
+        "ects": 8,
+        "moduleCode": "INHN0009",
+        "score": 6,
+        "deduction_recommendation": 1,
+        "explanation_recommendation": "Linear Algebra for Computer Scientists (MA-LinAlgICS): Lacks some advanced material covered in TUM course, though it covers vector spaces, systems of equations, similar to TUM's\u30104:15\u2020example_1_course_catalogue_LMU_BSc_Informatics.pdf\u3011."
+    },
+    "defaultCourse16": {
+        "id": 16,
+        "title": "Calculus",
+        "ects": 8,
+        "moduleCode": "INHN0014",
+        "score": 8,
+        "deduction_recommendation": 0,
+        "explanation_recommendation": "Calculus I & II: Covers comprehensive calculus concepts required by TUM's course."
+    },
+    "defaultCourse17": {
+        "id": 17,
+        "title": "Discrete Probability Theory",
+        "ects": 6,
+        "moduleCode": "INHN0020",
+        "score": 6,
+        "deduction_recommendation": 0,
+        "explanation_recommendation": "Introduction to Probability Calculus and Inductive Statistics (STAT-EWIDS): Matches TUM's discrete probability theory requirements\u30104:8\u2020example_1_course_catalogue_LMU_BSc_Informatics.pdf\u3011."
+    }
+}

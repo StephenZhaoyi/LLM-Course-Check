@@ -1,0 +1,155 @@
+{
+    "defaultCourse1": {
+      "id": 1,
+      "title": "Introduction to Informatics",
+      "ects": 6,
+      "moduleCode": "INHN0001",
+      "score": 0,
+      "deduction_recommendation": 0,
+      "explanation_recommendation": ""
+    },
+    "defaultCourse2": {
+      "id": 2,
+      "title": "Fundamentals of Programming (Exercises & Laboratory)",
+      "ects": 6,
+      "moduleCode": "INHN0002",
+      "score": 0,
+      "deduction_recommendation": 0,
+      "explanation_recommendation": ""
+    },
+    "defaultCourse3": {
+      "id": 3,
+      "title": "Introduction to Computer Organization and Technology - Computer Architecture",
+      "ects": 8,
+      "moduleCode": "INHN0003",
+      "score": 0,
+      "deduction_recommendation": 0,
+      "explanation_recommendation": ""
+    },
+    "defaultCourse4": {
+      "id": 4,
+      "title": "Introduction to Software Engineering",
+      "ects": 6,
+      "moduleCode": "INHN0006",
+      "score": 0,
+      "deduction_recommendation": 0,
+      "explanation_recommendation": ""
+    },
+    "defaultCourse5": {
+      "id": 5,
+      "title": "Operating Systems and System Software",
+      "ects": 6,
+      "moduleCode": "INHN0007",
+      "score": 0,
+      "deduction_recommendation": 0,
+      "explanation_recommendation": ""
+    },
+    "defaultCourse6": {
+      "id": 6,
+      "title": "Fundamentals of Algorithms and Data Structures",
+      "ects": 6,
+      "moduleCode": "INHN0008",
+      "score": 0,
+      "deduction_recommendation": 0,
+      "explanation_recommendation": ""
+    },
+    "defaultCourse7": {
+      "id": 7,
+      "title": "Fundamentals of Databases",
+      "ects": 6,
+      "moduleCode": "INHN0011",
+      "score": 0,
+      "deduction_recommendation": 0,
+      "explanation_recommendation": ""
+    },
+    "defaultCourse8": {
+      "id": 8,
+      "title": "Computer Networking and IT Security",
+      "ects": 6,
+      "moduleCode": "INHN0012",
+      "score": 0,
+      "deduction_recommendation": 0,
+      "explanation_recommendation": ""
+    },
+    "defaultCourse9": {
+      "id": 9,
+      "title": "Information Theory and Theoretical Informatics",
+      "ects": 6,
+      "moduleCode": "INHN0013",
+      "score": 0,
+      "deduction_recommendation": 0,
+      "explanation_recommendation": ""
+    },
+    "defaultCourse10": {
+      "id": 10,
+      "title": "Introduction to Signal Processing",
+      "ects": 6,
+      "moduleCode": "INHN0016",
+      "score": 0,
+      "deduction_recommendation": 0,
+      "explanation_recommendation": ""
+    },
+    "defaultCourse11": {
+      "id": 11,
+      "title": "Foundations of Cyber-Physical Systems",
+      "ects": 8,
+      "moduleCode": "INHN0018",
+      "score": 0,
+      "deduction_recommendation": 0,
+      "explanation_recommendation": ""
+    },
+    "defaultCourse12": {
+      "id": 12,
+      "title": "Enterprise Architecture Management and Reference Models",
+      "ects": 6,
+      "moduleCode": "INHN0017",
+      "score": 0,
+      "deduction_recommendation": 0,
+      "explanation_recommendation": ""
+    },
+    "defaultCourse13": {
+      "id": 13,
+      "title": "Business Process Management",
+      "ects": 5,
+      "moduleCode": "INHN0019",
+      "score": 0,
+      "deduction_recommendation": 0,
+      "explanation_recommendation": ""
+    },
+    "defaultCourse14": {
+      "id": 14,
+      "title": "Discrete Structures",
+      "ects": 8,
+      "moduleCode": "INHN0004",
+      "score": 0,
+      "deduction_recommendation": 0,
+      "explanation_recommendation": ""
+    },
+    "defaultCourse15": {
+      "id": 15,
+      "title": "Linear Algebra",
+      "ects": 8,
+      "moduleCode": "INHN0009",
+      "score": 0,
+      "deduction_recommendation": 0,
+      "explanation_recommendation": ""
+    },
+    "defaultCourse16": {
+      "id": 16,
+      "title": "Calculus",
+      "ects": 8,
+      "moduleCode": "INHN0014",
+      "score": 0,
+      "deduction_recommendation": 0,
+      "explanation_recommendation": ""
+    },
+    "defaultCourse17": {
+      "id": 17,
+      "title": "Discrete Probability Theory",
+      "ects": 6,
+      "moduleCode": "INHN0020",
+      "score": 0,
+      "deduction_recommendation": 0,
+      "explanation_recommendation": ""
+    }
+  }
