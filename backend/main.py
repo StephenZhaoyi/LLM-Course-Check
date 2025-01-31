@@ -1,9 +1,9 @@
 # main.py
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends, HTTPException, UploadFile, File
 from sqlalchemy.orm import Session
 from typing import List
 from fastapi.middleware.cors import CORSMiddleware
-
+from pathlib import Path
 from database import Base, engine, SessionLocal
 from models import Applicant, Module, Course
 from schemas import (
@@ -137,6 +137,32 @@ def get_courses_for_applicant(applicant_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="No courses found for this applicant")
     return courses
 
+# Create a directory for candidate data if it doesn't exist
+candidate_data_dir = Path("candidate_data")
+candidate_data_dir.mkdir(parents=True, exist_ok=True)
+
+@app.post("/upload-documents/")
+async def upload_documents(
+    applicant_excel: UploadFile = File(...),
+    course_description: UploadFile = File(...)
+):
+    # Validate file types
+    if applicant_excel.content_type != "application/pdf":
+        raise HTTPException(status_code=400, detail="Please upload only the applicant Excel PDF.")
+    if course_description.content_type != "application/pdf":
+        raise HTTPException(status_code=400, detail="Please upload only the course description PDF.")
+
+    # Save the files
+    applicant_excel_path = candidate_data_dir / applicant_excel.filename
+    course_description_path = candidate_data_dir / course_description.filename
+
+    with open(applicant_excel_path, "wb") as f:
+        f.write(await applicant_excel.read())
+    
+    with open(course_description_path, "wb") as f:
+        f.write(await course_description.read())
+
+    return {"status": "success", "message": "Files uploaded successfully."}
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
