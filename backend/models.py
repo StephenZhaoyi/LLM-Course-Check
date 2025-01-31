@@ -15,6 +15,8 @@ class Applicant(Base):
     subject = Column(String(100))
     regular_duration = Column(Integer)
     number_of_credits = Column(Integer)
+    submission_time = Column(Date)
+    score = Column(Integer, nullable=True)
 
     # Relationship to Courses
     courses = relationship("Course", back_populates="applicant")

@@ -1,7 +1,7 @@
 # schemas.py
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from typing import Optional, List
-from datetime import date
+from datetime import date, datetime
 
 # ---------------------
 # APPLICANT SCHEMAS
@@ -15,6 +15,8 @@ class ApplicantBase(BaseModel):
     subject: Optional[str] = None
     regular_duration: Optional[int] = None
     number_of_credits: Optional[int] = None
+    submission_time: Optional[datetime] = None
+    score: Optional[int] = None
 
 class ApplicantCreate(ApplicantBase):
     """ Used for creating new applicants """
@@ -23,8 +25,7 @@ class ApplicantCreate(ApplicantBase):
 class ApplicantOut(ApplicantBase):
     applicant_id: int
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)  # ✅ Fixes orm_mode warning
 
 # ---------------------
 # MODULE SCHEMAS
@@ -39,8 +40,7 @@ class ModuleCreate(ModuleBase):
 class ModuleOut(ModuleBase):
     module_id: int
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)  # ✅ Fixes orm_mode warning
 
 # ---------------------
 # COURSE SCHEMAS
@@ -59,8 +59,7 @@ class CourseCreate(CourseBase):
 
 class CourseOut(CourseBase):
     course_id: int
-    applicant_id: Optional[int]=None
-    module_id: Optional[int]=None
+    applicant_id: Optional[int] = None
+    module_id: Optional[int] = None
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)  # ✅ Fixes orm_mode warning

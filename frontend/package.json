@@ -8,6 +8,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "add": "^2.0.6",
+    "axios": "^1.7.9",
     "husky": "^9.1.6",
     "init": "^0.1.2",
     "npx": "^10.2.2",
