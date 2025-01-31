@@ -1,28 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout/Layout";
 import { match } from "ts-pattern";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import Pagination from "../components/Pagination/Pagination";
 import { Link } from "react-router-dom";
-import mockData from "./mockdata";
+import { fetchApplicants } from "../api";
 
 export default function ApplicantListPage() {
 	const itemsPerPage = 15;
 	const [currentPage, setCurrentPage] = useState(1);
+	const [applicants, setApplicants] = useState([]);
 
-	const applicantsData = mockData.applicants.map((applicant) => ({
-		applicationNumber: applicant.applicantId,
-		applicantName: `${applicant.firstName} ${applicant.lastName}`,
-		submissionDate: applicant.submissionDate,
-		submissionTime: applicant.submissionTime,
-		applicantDateOfBirth: applicant.dateOfBirth,
-		nationality: applicant.nationality,
-		score: Math.floor(Math.random() * 100),
-	}));
+	useEffect(() => {
+		const loadApplicants = async () => {
+			try {
+				const data = await fetchApplicants();
+	
+				// Transform API data to match the expected structure
+				const formattedApplicants = data.map((applicant) => ({
+					applicationNumber: applicant.applicant_id,
+					applicantName: `${applicant.first_name} ${applicant.last_name}`,
+					submissionTime: "2024-01-01 09:00:00",
+					applicantDateOfBirth: applicant.date_of_birth,
+					nationality: applicant.nationality,
+					score: applicant.score,
+				}));
+	
+				console.log("Formatted applicants:", formattedApplicants);
+				setApplicants(formattedApplicants);
+			} catch (error) {
+				console.error("Error fetching applicants:", error);
+			}
+		};
+	
+		loadApplicants();
+	}, []);
 
-	const sortedApplicants = [...applicantsData].sort(
-		(a, b) => b.score - a.score
-	);
+	const sortedApplicants = [...applicants].sort((a, b) => b.score - a.score);
 
 	const totalPages = Math.ceil(sortedApplicants.length / itemsPerPage);
 	const currentApplicants = sortedApplicants.slice(
@@ -61,7 +75,7 @@ export default function ApplicantListPage() {
 				</div>
 
 				<div className="bg-white rounded-lg overflow-hidden">
-					<div className="grid grid-cols-[1.1fr_1.5fr_1.5fr_1fr_1.5fr_0.8fr_0.4fr] gap-4 bg-gray-100 text-title-gray font-semibold uppercase text-sm px-2 py-3">
+					<div className="grid grid-cols-[1fr_1.5fr_1.2fr_1.3fr_1.2fr_0.8fr_0.4fr] gap-4 bg-gray-100 text-title-gray font-semibold uppercase text-sm px-2 py-3">
 						<div className="text-center">Application No.</div>
 						<div className="text-center">Applicant Name</div>
 						<div className="text-center">Submission Date</div>
@@ -80,7 +94,7 @@ export default function ApplicantListPage() {
 							return (
 								<div
 									key={index}
-									className="grid grid-cols-[1.1fr_1.5fr_1.5fr_1fr_1.5fr_0.8fr_0.4fr] gap-4 border-b px-2 py-2 items-center hover:bg-gray-50 transition duration-200 text-sm overflow-scroll"
+									className="grid grid-cols-[1fr_1.5fr_1.2fr_1.3fr_1.2fr_0.8fr_0.4fr] gap-4 border-b px-2 py-2 items-center hover:bg-gray-50 transition duration-200 text-sm overflow-scroll"
 								>
 									<div className="text-center">
 										{applicant.applicationNumber}
@@ -89,7 +103,7 @@ export default function ApplicantListPage() {
 										{applicant.applicantName}
 									</div>
 									<div className="text-center">
-										{applicant.submissionDate}
+										{applicant.applicantDateOfBirth}
 									</div>
 									<div className="text-center">
 										{applicant.submissionTime}

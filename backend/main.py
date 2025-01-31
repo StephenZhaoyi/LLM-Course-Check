@@ -1,6 +1,8 @@
 # main.py
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
+from typing import List
+from fastapi.middleware.cors import CORSMiddleware
 
 from database import Base, engine, SessionLocal
 from models import Applicant, Module, Course
@@ -13,7 +15,8 @@ import subprocess
 import json
 
 # Load JSON data
-with open("data\evaluation_result.json", "r", encoding="utf-8") as file:
+# For windows, use "\"; for linux, use "/"
+with open("data/evaluation_result.json", "r", encoding="utf-8") as file:
     evaluation_data = json.load(file)
 
 # Create tables if they don't exist
@@ -47,6 +50,12 @@ def get_applicant(applicant_id: int, db: Session = Depends(get_db)):
     if not db_applicant:
         raise HTTPException(status_code=404, detail="Applicant not found")
     return db_applicant
+
+@app.get("/applicants/", response_model=List[ApplicantOut])
+def list_all_applicants(db: Session = Depends(get_db)):
+    """ Fetch all applicants from the database. """
+    applicants = db.query(Applicant).all()
+    return applicants
 
 
 # ------------------------------
@@ -119,3 +128,20 @@ def execute_core():
         return {"status": "success", "output": result.stdout}
     except subprocess.CalledProcessError as e:
         raise HTTPException(status_code=500, detail=f"Execution failed: {e.stderr}")
+
+@app.get("/applicants/{applicant_id}/courses", response_model=List[CourseOut])
+def get_courses_for_applicant(applicant_id: int, db: Session = Depends(get_db)):
+    """ Fetch all courses for a specific applicant. """
+    courses = db.query(Course).filter(Course.applicant_id == applicant_id).all()
+    if not courses:
+        raise HTTPException(status_code=404, detail="No courses found for this applicant")
+    return courses
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
