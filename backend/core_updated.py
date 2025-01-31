@@ -17,7 +17,7 @@ if not api_key:
 client = OpenAI(api_key=api_key)
 
 file2 = client.files.create(
-    file=open(r"data/example_1_course_catalogue_LMU_BSc_Informatics.pdf", "rb"),
+    file=open(r"backend/data/example_1_course_catalogue_LMU_BSc_Informatics.pdf", "rb"),
     purpose="assistants"
 )
 
@@ -26,13 +26,13 @@ vector_store = client.beta.vector_stores.create(
 )
 
 # Path to your JSON file
-json_path_excel = r"data/applicant_excel.json"
+json_path_excel = r"backend/data/applicant_excel.json"
 with open(json_path_excel, "r", encoding="utf-8") as file1:
     json_text_excel = file1.read()
-json_path_evaluation = r"data/evaluation_template.json"
+json_path_evaluation = r"backend/data/evaluation_template.json"
 with open(json_path_evaluation, "r", encoding="utf-8") as file2:
     json_text_evaluation = file2.read()
-json_path_tum = r"data/tum_module.json"
+json_path_tum = r"backend/data/tum_module.json"
 with open(json_path_tum, "r", encoding="utf-8") as file3:
     json_text_tum = file3.read()
 
@@ -123,7 +123,7 @@ def write_to_json(ai_answer):
     except json.JSONDecodeError as e:
         raise ValueError(f"Invalid JSON format: {e}")
     
-    output_file = r"data/evaluation_result.json"
+    output_file = r"backend/data/evaluation_result.json"
     with open(output_file, "w") as file:
         json.dump(data, file, indent=4)
     print(f"JSON content saved successfully to {output_file}")
