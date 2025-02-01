@@ -16,7 +16,7 @@ import json
 
 # Load JSON data
 # For windows, use "\"; for linux, use "/"
-with open("data/evaluation_result.json", "r", encoding="utf-8") as file:
+with open("backend/data/evaluation_result.json", "r", encoding="utf-8") as file:
     evaluation_data = json.load(file)
 
 # Create tables if they don't exist
