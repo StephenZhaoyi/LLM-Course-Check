@@ -10,6 +10,7 @@ const LoginPage = () => {
     const navigate = useNavigate();
 
     const sendVerificationCode = async () => {
+        console.log("sendVerificationCode triggered");
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             setError("Invalid email format. Please try again!");
@@ -18,7 +19,7 @@ const LoginPage = () => {
         setError("");
 
         try {
-            const response = await fetch("http://localhost:5000/api/send-code", {
+            const response = await fetch("http://localhost:8000/api/send-code", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email }),
@@ -36,6 +37,7 @@ const LoginPage = () => {
     };
 
     const verifyCode = async () => {
+        console.log("verifyCode triggered");
         if (!code) {
             setError("Please enter the verification code.");
             return;
@@ -43,7 +45,7 @@ const LoginPage = () => {
         setError("");
 
         try {
-            const response = await fetch("http://localhost:5000/api/verify-code", {
+            const response = await fetch("http://localhost:8000/api/verify-code", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, code }),
