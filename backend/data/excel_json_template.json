@@ -1,0 +1,80 @@
+{
+    "Informatics": {
+        "Introduction to Informatics": {
+            "ects at TUM": 6,
+            "applicant's courses": []
+        },
+        "Fundamentals of Programming (Exercises & Laboratory)": {
+            "ects at TUM": 6,
+            "applicant's courses": []
+        },
+        "Introduction to Computer Organization and Technology-Computer Architecture": {
+            "ects at TUM": 8,
+            "applicant's courses": []
+        },
+        "Introduction to Software Engineering": {
+            "ects at TUM": 6,
+            "applicant's courses": []
+        },
+        "Operating Systems and System Software": {
+            "ects at TUM": 6,
+            "applicant's courses": []
+        },
+        "Fundamentals of Algorithms and Data Structures": {
+            "ects at TUM": 6,
+            "applicant's courses": []
+        },
+        "Fundamentals of Databases": {
+            "ects at TUM": 6,
+            "applicant's courses": []
+        },
+        "Computer Networking and IT security": {
+            "ects at TUM": 6,
+            "applicant's courses": []
+        }
+    },
+    "Theoretical Informatics": {
+        "Information Theory and Theoretical Informatics": {
+            "ects at TUM": 6,
+            "applicant's courses": []
+        }
+    },
+    "Cyberphysical Systems": {
+        "Introduction to Signal Processing": {
+            "ects at TUM": 6,
+            "applicant's courses": []
+        },
+        "Foundations of Cyber-Physical Systems": {
+            "ects at TUM": 8,
+            "applicant's courses": []
+        }
+    },
+    "Information Systems": {
+        "Enterprise Architecture Management and Reference Models": {
+            "ects at TUM": 6,
+            "applicant's courses": []
+        },
+        "Business Process": {
+            "ects at TUM": 5,
+            "applicant's courses": []
+        }
+    },
+    "Mathematics": {
+        "Discrete Structures": {
+            "ects at TUM": 8,
+            "applicant's courses": []
+        },
+        "Linear Algebra": {
+            "ects at TUM": 8,
+            "applicant's courses": []
+        },
+        "Calculus": {
+            "ects at TUM": 8,
+            "applicant's courses": []
+        },
+        "Discrete Probability": {
+            "ects at TUM": 6,
+            "applicant's courses": []
+        }
+    }
+}
