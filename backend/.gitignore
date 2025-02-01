@@ -2,4 +2,4 @@
 .DS_Store
 candidate_data
 __pycache__
-data
+test.db

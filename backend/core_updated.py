@@ -17,7 +17,7 @@ if not api_key:
 client = OpenAI(api_key=api_key)
 
 file2 = client.files.create(
-    file=open(r"backend/data/example_1_course_catalogue_LMU_BSc_Informatics.pdf", "rb"),
+    file=open(r"candidate_data/applicant_description.pdf", "rb"),
     purpose="assistants"
 )
 

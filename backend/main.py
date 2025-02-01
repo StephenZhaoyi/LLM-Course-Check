@@ -123,6 +123,9 @@ def get_course(course_id: int, db: Session = Depends(get_db)):
 @app.post("/execute-core")
 def execute_core():
     try:
+        # First, execute the reader_excel.py script
+        reader_result = subprocess.run(["python", "backend/reader_excel.py"], check=True, capture_output=True, text=True)
+        print("Reader Excel Output:", reader_result.stdout)
         # Execute the core_updated.py script
         result = subprocess.run(["python", "core_updated.py"], check=True, capture_output=True, text=True)
         return {"status": "success", "output": result.stdout}
@@ -141,6 +144,7 @@ def get_courses_for_applicant(applicant_id: int, db: Session = Depends(get_db)):
 candidate_data_dir = Path("candidate_data")
 candidate_data_dir.mkdir(parents=True, exist_ok=True)
 
+# Update the upload_documents endpoint
 @app.post("/upload-documents/")
 async def upload_documents(
     applicant_excel: UploadFile = File(...),
@@ -152,9 +156,9 @@ async def upload_documents(
     if course_description.content_type != "application/pdf":
         raise HTTPException(status_code=400, detail="Please upload only the course description PDF.")
 
-    # Save the files
-    applicant_excel_path = candidate_data_dir / applicant_excel.filename
-    course_description_path = candidate_data_dir / course_description.filename
+    # Define the path where the applicant_excel will be saved
+    applicant_excel_path = candidate_data_dir / "applicant_excel.pdf"
+    course_description_path = candidate_data_dir / "course_description.pdf"
 
     with open(applicant_excel_path, "wb") as f:
         f.write(await applicant_excel.read())
