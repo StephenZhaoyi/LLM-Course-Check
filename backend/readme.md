@@ -57,12 +57,16 @@ uvicorn main:app --reload
    - **Applicants**:
      - `POST /applicants/`: Create a new applicant.
      - `GET /applicants/{applicant_id}`: Retrieve applicant information by ID.
+     - `GET /applicants/`: Fetch all applicants.
+     - `GET /applicants/{applicant_id}/courses`: Fetch all courses for a specific applicant.
    - **Modules**:
      - `POST /modules/`: Create a new module.
      - `GET /modules/{module_id}`: Retrieve module information by ID.
    - **Courses**:
      - `POST /courses/`: Create a new course.
      - `GET /courses/{course_id}`: Retrieve course information by ID.
+   - **Upload File**:
+     - `POST /uplode-file/`: Upload the applicant's applicant_excel and course_description.
    - **Execute Core Logic**:
      - `POST /execute-core`: Executes the core logic defined in `core_updated.py`. This endpoint triggers the evaluation process using the OpenAI API and saves the results to a JSON file.
 
