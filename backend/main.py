@@ -138,7 +138,7 @@ def execute_core(applicant_id: int, db: Session = Depends(get_db)):
         print("Core Updated Output:", core_output)
         
         # 2. Use a consistent file path for evaluation JSON data.
-        eval_file_path = "data/evaluation_result.json"  # Make sure this is the correct path.
+        eval_file_path = "data1/evaluation_result.json"  # Make sure this is the correct path.
         with open(eval_file_path, "r", encoding="utf-8") as file:
             evaluation_data = json.load(file)
         
@@ -147,8 +147,8 @@ def execute_core(applicant_id: int, db: Session = Depends(get_db)):
             # Attach the applicant id to the course data
             course["applicant_id"] = applicant_id
             # Ensure that a numeric value is used for the calculations (use 0 if missing or None)
-            ects = course.get("ects") or 0
-            deduction = course.get("deduction_recommendation") or 0
+            ects = course.get("ects",0)
+            deduction = course.get("deduction_recommendation",0)
             course["score"] = ects - deduction
         
         # Write the updated JSON back to the file

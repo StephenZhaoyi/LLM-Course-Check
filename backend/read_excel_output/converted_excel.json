@@ -87,21 +87,41 @@
     "Cyberphysical Systems": {
         "Introduction to Signal Processing": {
             "ects at TUM": 6,
-            "applicant's courses": []
+            "applicant's courses": [
+                {
+                    "course": "Signal Processing and Control Theory (INF-PRIG)",
+                    "ects": 6
+                }
+            ]
         },
         "Foundations of Cyber-Physical Systems": {
             "ects at TUM": 8,
-            "applicant's courses": []
+            "applicant's courses": [
+                {
+                    "course": "Cyber Physical Systems Foundations (INF-CPSF)",
+                    "ects": 8
+                }
+            ]
         }
     },
     "Information Systems": {
         "Enterprise Architecture Management and Reference Models": {
             "ects at TUM": 6,
-            "applicant's courses": []
+            "applicant's courses": [
+                {
+                    "course": "Enterprise Architectures (INF-EAM)",
+                    "ects": 6
+                }
+            ]
         },
         "Business Process": {
             "ects at TUM": 5,
-            "applicant's courses": []
+            "applicant's courses": [
+                {
+                    "course": "Process Modeling and Analysis (INF-BPM)",
+                    "ects": 5
+                }
+            ]
         }
     },
     "Mathematics": {
