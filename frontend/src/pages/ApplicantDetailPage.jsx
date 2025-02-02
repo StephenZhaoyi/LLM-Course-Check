@@ -24,6 +24,34 @@ const modules = [
 	{ id: 5, name: "🟩 Mathematics", totalCredits: 30 },
 ];
 
+const moduleMapping = {
+	1: [
+		"Introduction to Informatics",
+		"Fundamentals of Programming (Exercises & Laboratory)",
+		"Introduction to Computer Organization and Technology - Computer Architecture",
+		"Introduction to Software Engineering",
+		"Operating Systems and System Software",
+		"Fundamentals of Algorithms and Data Structures",
+		"Fundamentals of Databases",
+		"Computer Networking and IT Security",
+	],
+	2: ["Information Theory and Theoretical Informatics"],
+	3: [
+		"Introduction to Signal Processing",
+		"Foundations of Cyber-Physical Systems",
+	],
+	4: [
+		"Enterprise Architecture Management and Reference Models",
+		"Business Process Management",
+	],
+	5: [
+		"Discrete Structures",
+		"Linear Algebra",
+		"Calculus",
+		"Discrete Probability Theory",
+	],
+};
+
 const ApplicantDetailPage = () => {
 	const { id } = useParams();
 	const navigate = useNavigate();
@@ -47,6 +75,15 @@ const ApplicantDetailPage = () => {
 
 	const TOTAL_CREDITS = 111;
 
+	const assignModuleId = (courseName) => {
+		for (const [moduleId, courseList] of Object.entries(moduleMapping)) {
+			if (courseList.includes(courseName)) {
+				return parseInt(moduleId); // Ensure module_id is a number
+			}
+		}
+		return null; // Default to null if no match is found
+	};
+
 	useEffect(() => {
 		const loadApplicantData = async () => {
 			try {
@@ -68,7 +105,34 @@ const ApplicantDetailPage = () => {
 					"Fetched courses:",
 					JSON.stringify(coursesData, null, 2)
 				);
-				setCourses(coursesData || []);
+
+				// Create a map to store the course with the highest course_id for each course_name
+				const courseMap = new Map();
+
+				coursesData.forEach((course) => {
+					if (
+						!courseMap.has(course.course_name) ||
+						course.course_id >
+							courseMap.get(course.course_name).course_id
+					) {
+						courseMap.set(course.course_name, course);
+					}
+				});
+
+				// Convert the map back to an array
+				const filteredCourses = Array.from(courseMap.values());
+
+				// Assign module_id to each unique course
+				const updatedCourses = filteredCourses.map((course) => ({
+					...course,
+					module_id: assignModuleId(course.course_name),
+				}));
+
+				console.log("updatedCourses", updatedCourses);
+
+				console.log("Updated courses with module_id:", updatedCourses);
+
+				setCourses(updatedCourses || []);
 			} catch (error) {
 				console.error("Error fetching courses:", error);
 			}
@@ -101,14 +165,20 @@ const ApplicantDetailPage = () => {
 					courseDescription: true,
 				});
 
-				toast.success("All files uploaded successfully!", { autoClose: 3000 });
+				toast.success("All files uploaded successfully!", {
+					autoClose: 3000,
+				});
 			} else {
 				console.log("Waiting for both files to be selected...");
-				toast.warn("Please select both files before uploading.", { autoClose: 3000 });
+				toast.warn("Please select both files before uploading.", {
+					autoClose: 3000,
+				});
 			}
 		} catch (error) {
 			console.error("File upload failed:", error);
-			toast.error("File upload failed! Check console for details.", { autoClose: 4000 });
+			toast.error("File upload failed! Check console for details.", {
+				autoClose: 4000,
+			});
 		} finally {
 			setIsUploading(false);
 		}
@@ -122,15 +192,22 @@ const ApplicantDetailPage = () => {
 			await executeCoreAnalysis(id);
 			console.log("Analysis completed successfully!");
 			// alert("Analysis completed successfully!");
-			toast.success("Analysis completed successfully!", { autoClose: 3000 });
+			toast.success("Analysis completed successfully!", {
+				autoClose: 3000,
+			});
+			setTimeout(() => {
+				window.location.reload();
+			}, 1000);
 		} catch (error) {
 			console.error(`Analysis failed for applicant ${id}:`, error);
 			// alert("Analysis failed!");
-			toast.error("Analysis failed. Check the logs.", { autoClose: 4000 });
+			toast.error("Analysis failed. Check the logs.", {
+				autoClose: 4000,
+			});
 		} finally {
 			setIsExecuting(false);
 		}
-	};	
+	};
 
 	// test data
 	console.log("applicant", applicant);
@@ -138,21 +215,34 @@ const ApplicantDetailPage = () => {
 
 	// Map modules to include achieved and total credits based on courses
 	const modulesWithAchievedCredits = modules.map((module) => {
-		const moduleCourses = courses?.filter(
+		// Get all courses that belong to this module
+		const moduleCourses = courses.filter(
 			(course) => course.module_id === module.id
 		);
 
+		console.log("moduleCourses", moduleCourses);
+
+		// Sum up the achieved credits for this module
 		const achievedCredits = moduleCourses.reduce(
-			(sum, course) => sum + (course.achieved_credits || 0),
+			(sum, course) => sum + (course.score || 0),
 			0
 		);
 
+		console.log("achievedCredits", achievedCredits);
+
+		// Sum up the total score for all courses in this module
 		const totalScore = moduleCourses.reduce(
 			(sum, course) => sum + (course.score || 0),
 			0
 		);
 
-		return { ...module, achieved: achievedCredits, score: totalScore };
+		console.log("totalScore", totalScore);
+
+		return {
+			...module,
+			achieved: achievedCredits,
+			score: totalScore,
+		};
 	});
 
 	const totalAchievedCredits = modulesWithAchievedCredits.reduce(

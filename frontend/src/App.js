@@ -16,7 +16,7 @@ const App = () => {
         <Route path="/applicants" element={<ApplicantListPage />} />
         <Route path="/applicant/:id" element={<ApplicantDetailPage />} />
         {/* Handle unmatched routes, redirect to LoginPage */}
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<Navigate to="/applicants" replace />} />
       </Routes>
     </Router>
   );
