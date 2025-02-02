@@ -34,7 +34,7 @@ ai_instruction = "You are acting with a course examiner, you wil need to give re
 
 my_updated_assistant = client.beta.assistants.update(
     assistant_id='asst_zwOUgbxXe9GK1bdYNRZn09rh',
-    model="gpt-4o", #gpt-4o",                     # Specify an available model
+    model="gpt-4o", #gpt-4o",
     instructions=ai_instruction,
     tools=[{"type": "file_search"}],   # Declare the use of file_search
     tool_resources={
