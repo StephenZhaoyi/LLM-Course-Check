@@ -13,6 +13,8 @@ import {
 	uploadDocuments,
 	executeCoreAnalysis,
 } from "../api";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const modules = [
 	{ id: 1, name: "🟦 Informatics", totalCredits: 50 },
@@ -82,6 +84,7 @@ const ApplicantDetailPage = () => {
 		setIsUploading(true);
 		try {
 			console.log(`Uploading ${fileType}:`, file.name);
+			toast.info(`Uploading ${fileType}...`, { autoClose: 2000 });
 
 			const updatedFiles = { ...uploadedFiles, [fileType]: file };
 			setUploadedFiles(updatedFiles);
@@ -97,11 +100,15 @@ const ApplicantDetailPage = () => {
 					applicantExcel: true,
 					courseDescription: true,
 				});
+
+				toast.success("All files uploaded successfully!", { autoClose: 3000 });
 			} else {
 				console.log("Waiting for both files to be selected...");
+				toast.warn("Please select both files before uploading.", { autoClose: 3000 });
 			}
 		} catch (error) {
 			console.error("File upload failed:", error);
+			toast.error("File upload failed! Check console for details.", { autoClose: 4000 });
 		} finally {
 			setIsUploading(false);
 		}
@@ -110,17 +117,20 @@ const ApplicantDetailPage = () => {
 	const handleExecuteCore = async () => {
 		setIsExecuting(true);
 		try {
-			console.log("Running core analysis...");
-			await executeCoreAnalysis();
+			toast.info("Running core analysis...", { autoClose: 3000 });
+			console.log(`Running core analysis for applicant ${id}...`);
+			await executeCoreAnalysis(id);
 			console.log("Analysis completed successfully!");
-			alert("Analysis completed successfully!");
+			// alert("Analysis completed successfully!");
+			toast.success("Analysis completed successfully!", { autoClose: 3000 });
 		} catch (error) {
-			console.error("Analysis failed:", error);
-			alert("Analysis failed!");
+			console.error(`Analysis failed for applicant ${id}:`, error);
+			// alert("Analysis failed!");
+			toast.error("Analysis failed. Check the logs.", { autoClose: 4000 });
 		} finally {
 			setIsExecuting(false);
 		}
-	};
+	};	
 
 	// test data
 	console.log("applicant", applicant);

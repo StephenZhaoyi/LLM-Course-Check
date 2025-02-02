@@ -3,10 +3,12 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import LoginPage from "./pages/LoginPage";
 import ApplicantListPage from "./pages/ApplicantListPage";
 import ApplicantDetailPage from "./pages/ApplicantDetailPage";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   return (
     <Router>
+      <ToastContainer position="top-right" />
       <Routes>
         {/* Default page: LoginPage */}
         <Route path="/" element={<LoginPage />} />
