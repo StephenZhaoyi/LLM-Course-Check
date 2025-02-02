@@ -167,6 +167,10 @@ async def upload_documents(
         f.write(await course_description.read())
 
     return {"status": "success", "message": "Files uploaded successfully."}
+
+from verification_routes import router as verification_router
+app.include_router(verification_router)
+
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,

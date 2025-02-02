@@ -63,3 +63,7 @@ class CourseOut(CourseBase):
     module_id: Optional[int] = None
 
     model_config = ConfigDict(from_attributes=True)  # ✅ Fixes orm_mode warning
+
+
+
+
