@@ -1,11 +1,11 @@
 {
     "applicant_id": 0,
-    "first_name": "First Name",
-    "last_name": "Last Name",
-    "date_of_birth": "Date of Birth",
-    "nationality": "Nationality",
+    "first_name": "Max",
+    "last_name": "Mustermann",
+    "date_of_birth": "1995-08-24",
+    "nationality": "German",
     "university": "TUM",
-    "subject": "IE",
+    "subject": "Informatics",
     "regular_duration": "4",
     "number_of_credits": 120
 }
