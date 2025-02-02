@@ -27,6 +27,7 @@ const ApplicantDetailPage = () => {
 	const navigate = useNavigate();
 	const [applicant, setApplicant] = useState(null);
 	const [courses, setCourses] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
 
 	const [selectedModule, setSelectedModule] = useState(null);
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -51,6 +52,8 @@ const ApplicantDetailPage = () => {
 				setApplicant(applicantData);
 			} catch (error) {
 				console.error("Error fetching applicant:", error);
+			} finally {
+				setIsLoading(false);
 			}
 		};
 		const loadCourses = async () => {
@@ -75,19 +78,25 @@ const ApplicantDetailPage = () => {
 	const handleFileUpload = async (e, fileType) => {
 		const file = e.target.files[0];
 		if (!file) return;
-	
+
 		setIsUploading(true);
 		try {
 			console.log(`Uploading ${fileType}:`, file.name);
-	
+
 			const updatedFiles = { ...uploadedFiles, [fileType]: file };
 			setUploadedFiles(updatedFiles);
-	
+
 			if (updatedFiles.applicantExcel && updatedFiles.courseDescription) {
-				await uploadDocuments(updatedFiles.applicantExcel, updatedFiles.courseDescription);
+				await uploadDocuments(
+					updatedFiles.applicantExcel,
+					updatedFiles.courseDescription
+				);
 				console.log("Files uploaded successfully!");
-	
-				setFileUploadStatus({ applicantExcel: true, courseDescription: true });
+
+				setFileUploadStatus({
+					applicantExcel: true,
+					courseDescription: true,
+				});
 			} else {
 				console.log("Waiting for both files to be selected...");
 			}
@@ -116,24 +125,6 @@ const ApplicantDetailPage = () => {
 	// test data
 	console.log("applicant", applicant);
 	console.log("courses", courses);
-
-	if (!applicant) {
-		return (
-			<Layout>
-				<div className="flex flex-col max-h-screen bg-gray-50 mt-12 p-8">
-					<div className="text-xl font-semibold text-red-500">
-						Applicant not found!
-					</div>
-					<button
-						onClick={() => navigate(-1)}
-						className="mt-6 px-4 py-2 bg-tum-blue text-white rounded hover:bg-blue-700 transition"
-					>
-						Go Back
-					</button>
-				</div>
-			</Layout>
-		);
-	}
 
 	// Map modules to include achieved and total credits based on courses
 	const modulesWithAchievedCredits = modules.map((module) => {
@@ -176,7 +167,34 @@ const ApplicantDetailPage = () => {
 		setSelectedModule(null);
 	};
 
-	if (applicant) {
+	if (isLoading) {
+		return (
+			<Layout>
+				<div className="flex flex-col max-h-screen bg-gray-50 mt-24 p-8 items-center justify-center">
+					<p className="text-lg font-semibold text-gray-500">
+						Loading...
+					</p>
+				</div>
+			</Layout>
+		);
+	}
+	if (!isLoading && !applicant) {
+		return (
+			<Layout>
+				<div className="flex flex-col max-h-screen bg-gray-50 mt-12 p-8">
+					<div className="text-xl font-semibold text-red-500">
+						Applicant not found!
+					</div>
+					<button
+						onClick={() => navigate(-1)}
+						className="mt-6 px-4 py-2 bg-tum-blue text-white rounded hover:bg-blue-700 transition"
+					>
+						Go Back
+					</button>
+				</div>
+			</Layout>
+		);
+	} else {
 		return (
 			<Layout>
 				<div className="flex flex-col max-h-screen bg-gray-50 mt-12 p-8">
@@ -324,7 +342,11 @@ const ApplicantDetailPage = () => {
 										? "bg-gray-400 cursor-not-allowed"
 										: "bg-tum-blue hover:bg-blue-700"
 								}`}
-								disabled={(fileUploadStatus.applicantExcel && fileUploadStatus.courseDescription) || isExecuting}
+								disabled={
+									!fileUploadStatus.applicantExcel ||
+									!fileUploadStatus.courseDescription ||
+									isExecuting
+								}
 							>
 								{isExecuting
 									? "Running Analysis..."
