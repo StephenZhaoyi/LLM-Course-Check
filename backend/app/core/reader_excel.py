@@ -2,10 +2,14 @@ import time
 from openai import OpenAI
 import json
 import re
+from dotenv import load_dotenv
+import os
 
 # assistant_id: asst_fFyYyvEq8Tf7jknT7W0UGTYH
 # Initialize OpenAI client
-client = OpenAI(api_key="API-KEY HERE")
+load_dotenv("APIKey.env")
+api_key_1 = os.getenv("API_KEY")
+client = OpenAI(api_key=api_key_1)
 file1 = client.files.create(
     file=open(r"backend\app\data\example_1_application_sheet.pdf", "rb"),
     purpose='assistants'
@@ -38,13 +42,18 @@ courses_template_path = r'backend\app\data\excel_json_template.json'
 with open(courses_template_path, 'r', encoding='utf-8') as file2:
     courses_template = file2.read()
 ai_prompt =  f"""
-Please use the PDF file that I provide to fill in this applicant json template {applicant_template} in all parts except applicant_id
-and course json template {courses_template} in applicant's courses. The applicant's courses should contain a list of <curly bracket> "course": [course's name (in third column)], "ects": <course's ects (in 4th column, in the same row
-with course's name)] <\curly bracket>. The required information for filling in applicant json template
-can be found in the first table 3rd column in the PDF (Personal data table) and the required information for filling in course json template
-can be found in the second table (Curricular Analysis table). You should check carefully each row in the PDF to write
-everything correctly. You should acknowledge that every course's ects can have different values, so you need
-to watch out. Also, you should not make up any information to the json. If you cannot find that information in PDF, please leave it blank.
+Please use the PDF file that I provide to fill in this applicant json template 
+{applicant_template} in all parts except applicant_id and course json template 
+{courses_template} in applicant's courses. The applicant's courses should contain
+a list of <curly bracket> "course": [full course's name (in third column)], "ects": 
+<course's ects (in 4th column, in the same row with course's name)] <\curly bracket>. 
+The required information for filling in applicant json template can be found in the 
+first table 3rd column in the PDF (Personal data table) and the required information
+for filling in course json template can be found in the second table (Curricular 
+Analysis table). You should check carefully each row in the PDF to write everything
+correctly. You should acknowledge that every course's ects can have different values,
+so you need to watch out. Also, you should not make up any information to the json. 
+If you cannot find that information in PDF, please leave it blank.
 Please provide the 2 json in this format:
 <applicant_json>
 Filled applicant json go here
@@ -112,5 +121,5 @@ def write_to_json(ai_answer):
     with open(r"backend\app\data\converted_excel.json", "w") as course_file:
         json.dump(course_json, course_file, indent=4)
 
-    print("JSON content saved successfully to applicant.json and course.json")
+    print("JSON content saved successfully to applicant_info.json and converted_excel.json")
 write_to_json(msg.content[0].text.value)

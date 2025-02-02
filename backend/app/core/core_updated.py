@@ -20,7 +20,7 @@ vector_store = client.beta.vector_stores.create(
 )
 
 # Path to your JSON file
-json_path_excel = r'backend\app\data\applicant_excel.json'
+json_path_excel = r'backend\app\data\converted_excel.json'
 with open(json_path_excel, 'r', encoding='utf-8') as file1:
     json_text_excel = file1.read()
 json_path_evaluation = r'backend\app\data\evaluation_template.json'
@@ -131,6 +131,12 @@ def write_to_json(ai_answer):
     except json.JSONDecodeError as e:
         raise ValueError(f"Invalid JSON format: {e}")
     
+    for category, courses in data.items():
+        for course_key, course_details in courses.items():
+            ects = course_details.get("ects", 0)
+            deduction = course_details.get("deduction_recommendation", 0)
+            course_details["score"] = ects - deduction      
+
     output_file = r"backend\app\data\evaluation_result.json"
     with open(output_file, "w") as file:
         json.dump(data, file, indent=4)
