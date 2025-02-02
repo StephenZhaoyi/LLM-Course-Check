@@ -56,7 +56,7 @@ export const uploadDocuments = async (applicantExcel, courseDescription) => {
 		formData.append("course_description", courseDescription);
 
 	try {
-		toast.info("Uploading documents...", { autoClose: 2000 });
+		// toast.info("Uploading documents...", { autoClose: 2000 });
 		const response = await axios.post(
 			`${API_BASE_URL}/upload-documents/`,
 			formData,
@@ -64,7 +64,7 @@ export const uploadDocuments = async (applicantExcel, courseDescription) => {
 				headers: { "Content-Type": "multipart/form-data" },
 			}
 		);
-		toast.success("Documents uploaded successfully!", { autoClose: 3000 });
+		// toast.success("Documents uploaded successfully!", { autoClose: 3000 });
 		return response.data;
 	} catch (error) {
 		console.error("File upload error:", error.response?.data || error);
@@ -77,7 +77,7 @@ export const executeCoreAnalysis = async (applicantId) => {
     try {
         toast.info(`Executing core analysis for applicant ${applicantId}...`, { autoClose: 3000 });
 
-        console.log(`Executing core analysis for applicant ${applicantId}`);
+        // console.log(`Executing core analysis for applicant ${applicantId}`);
         const response = await axios.post(
             `${API_BASE_URL}/execute-core/${applicantId}`
         );
@@ -89,4 +89,18 @@ export const executeCoreAnalysis = async (applicantId) => {
         toast.error("Core analysis failed. Please check the logs.", { autoClose: 4000 });
         throw error;
     }
+};
+
+export const updateApplicantScore = async (applicantId, newScore) => {
+	try {
+		const response = await axios.put(
+			`${API_BASE_URL}/applicants/${applicantId}/update-score`,
+			null,
+			{ params: { score: newScore } }
+		);
+		return response.data;
+	} catch (error) {
+		console.error(`Error updating score for applicant ${applicantId}:`, error.response?.data || error.message);
+		throw error;
+	}
 };

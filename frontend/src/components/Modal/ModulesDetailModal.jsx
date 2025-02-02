@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 
 const ModulesWithDetails = ({ isOpen, onClose, module }) => {
 	const [selectedCourse, setSelectedCourse] = useState(module.courses[0]);
-	console.log("module", module);
-	console.log("selectedCourse", selectedCourse);
+	// console.log("module", module);
+	// console.log("selectedCourse", selectedCourse);
 
 	useEffect(() => {
 		if (module?.courses?.length > 0) {

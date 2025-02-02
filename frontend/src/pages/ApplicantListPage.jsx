@@ -15,7 +15,7 @@ export default function ApplicantListPage() {
 		const loadApplicants = async () => {
 			try {
 				const data = await fetchApplicants();
-	
+
 				// Transform API data to match the expected structure
 				const formattedApplicants = data.map((applicant) => ({
 					applicationNumber: applicant.applicant_id,
@@ -25,14 +25,14 @@ export default function ApplicantListPage() {
 					nationality: applicant.nationality,
 					score: applicant.score,
 				}));
-	
-				console.log("Formatted applicants:", formattedApplicants);
+
+				// console.log("Formatted applicants:", formattedApplicants);
 				setApplicants(formattedApplicants);
 			} catch (error) {
 				console.error("Error fetching applicants:", error);
 			}
 		};
-	
+
 		loadApplicants();
 	}, []);
 
@@ -61,9 +61,16 @@ export default function ApplicantListPage() {
 					bgColor: "bg-[#CBE6F0]",
 				})
 			)
+			.when(
+				(s) => s > 0 && s <= 50,
+				() => ({
+					textColor: "text-[#805C5C]",
+					bgColor: "bg-[#F0CBCB]",
+				})
+			)
 			.otherwise(() => ({
-				textColor: "text-[#805C5C]",
-				bgColor: "bg-[#F0CBCB]",
+				textColor: "text-[#707070]",
+				bgColor: "bg-[#E6E6E6]",
 			}));
 	};
 
@@ -113,7 +120,7 @@ export default function ApplicantListPage() {
 									</div>
 									<div className="flex justify-center">
 										<span
-											className={`w-7 h-7 px-1 py-1 text-center rounded-md font-semibold ${textColor} ${bgColor}`}
+											className={`w-7 h-7 py-1 text-center rounded-md font-semibold ${textColor} ${bgColor}`}
 										>
 											{applicant.score}
 										</span>
