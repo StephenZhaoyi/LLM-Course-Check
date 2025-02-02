@@ -13,7 +13,6 @@ import {
 	uploadDocuments,
 	executeCoreAnalysis,
 } from "../api";
-// import mockData from "./mockdata";
 
 const modules = [
 	{ id: 1, name: "🟦 Informatics", totalCredits: 50 },
@@ -28,6 +27,22 @@ const ApplicantDetailPage = () => {
 	const navigate = useNavigate();
 	const [applicant, setApplicant] = useState(null);
 	const [courses, setCourses] = useState([]);
+
+	const [selectedModule, setSelectedModule] = useState(null);
+	const [isModalOpen, setIsModalOpen] = useState(false);
+
+	const [fileUploadStatus, setFileUploadStatus] = useState({
+		applicantExcel: false,
+		courseDescription: false,
+	});
+	const [uploadedFiles, setUploadedFiles] = useState({
+		applicantExcel: null,
+		courseDescription: null,
+	});
+	const [isUploading, setIsUploading] = useState(false);
+	const [isExecuting, setIsExecuting] = useState(false);
+
+	const TOTAL_CREDITS = 111;
 
 	useEffect(() => {
 		const loadApplicantData = async () => {
@@ -48,7 +63,7 @@ const ApplicantDetailPage = () => {
 					"Fetched courses:",
 					JSON.stringify(coursesData, null, 2)
 				);
-				setCourses(coursesData);
+				setCourses(coursesData || []);
 			} catch (error) {
 				console.error("Error fetching courses:", error);
 			}
@@ -57,31 +72,25 @@ const ApplicantDetailPage = () => {
 		loadCourses();
 	}, [id]);
 
-	const [fileUploadStatus, setFileUploadStatus] = useState({
-		applicantExcel: false,
-		courseDescription: false,
-	});
-	const [isUploading, setIsUploading] = useState(false);
-	const [isExecuting, setIsExecuting] = useState(false);
 	const handleFileUpload = async (e, fileType) => {
 		const file = e.target.files[0];
 		if (!file) return;
-
+	
 		setIsUploading(true);
 		try {
 			console.log(`Uploading ${fileType}:`, file.name);
-
-			const applicantExcel = fileType === "applicantExcel" ? file : null;
-			const courseDescription =
-				fileType === "courseDescription" ? file : null;
-
-			await uploadDocuments(applicantExcel, courseDescription);
-			console.log("File uploaded successfully!");
-
-			setFileUploadStatus((prevStatus) => ({
-				...prevStatus,
-				[fileType]: true,
-			}));
+	
+			const updatedFiles = { ...uploadedFiles, [fileType]: file };
+			setUploadedFiles(updatedFiles);
+	
+			if (updatedFiles.applicantExcel && updatedFiles.courseDescription) {
+				await uploadDocuments(updatedFiles.applicantExcel, updatedFiles.courseDescription);
+				console.log("Files uploaded successfully!");
+	
+				setFileUploadStatus({ applicantExcel: true, courseDescription: true });
+			} else {
+				console.log("Waiting for both files to be selected...");
+			}
 		} catch (error) {
 			console.error("File upload failed:", error);
 		} finally {
@@ -107,7 +116,6 @@ const ApplicantDetailPage = () => {
 	// test data
 	console.log("applicant", applicant);
 	console.log("courses", courses);
-	const TOTAL_CREDITS = 111;
 
 	if (!applicant) {
 		return (
@@ -129,7 +137,7 @@ const ApplicantDetailPage = () => {
 
 	// Map modules to include achieved and total credits based on courses
 	const modulesWithAchievedCredits = modules.map((module) => {
-		const moduleCourses = courses.filter(
+		const moduleCourses = courses?.filter(
 			(course) => course.module_id === module.id
 		);
 
@@ -151,14 +159,13 @@ const ApplicantDetailPage = () => {
 		0
 	);
 
-	const [selectedModule, setSelectedModule] = useState(null);
-	const [isModalOpen, setIsModalOpen] = useState(false);
-
 	const handleOpenModal = (module) => {
 		console.log("Opening modal for module:", module);
 		setSelectedModule({
 			...module,
-			courses: courses.filter((course) => course.moduleId === module.id),
+			courses: courses?.filter(
+				(course) => course.module_id === module.id
+			),
 		});
 		setIsModalOpen(true);
 	};
@@ -184,26 +191,28 @@ const ApplicantDetailPage = () => {
 							</div>
 							<div className="grid gap-y-3">
 								<p className="flex flex-row">
-									<p className="font-medium mr-2">
-										Date of Birth
-									</p>
-									{applicant.applicantDateOfBirth}
+									<span className="font-medium mr-2">
+										University:
+									</span>
+									{applicant.university}
 								</p>
 								<p className="flex flex-row">
-									<p className="font-medium mr-2">
-										Submission Time:
-									</p>
-									{applicant.submissionTime}
+									<span className="font-medium mr-2">
+										Subject:
+									</span>
+									{applicant.subject}
 								</p>
 								<p className="flex flex-row">
-									<p className="font-medium mr-2">
-										Nationality:
-									</p>{" "}
-									{applicant.nationality}
+									<span className="font-medium mr-2">
+										Number of Credits:
+									</span>
+									{applicant.number_of_credits}
 								</p>
 								<p className="flex flex-row align-center">
-									<p className="font-medium mr-2">Score:</p>
-									{totalAchievedCredits}
+									<span className="font-medium mr-2">
+										Regular Duration:
+									</span>
+									{applicant.regular_duration} years
 								</p>
 							</div>
 						</div>
@@ -231,20 +240,20 @@ const ApplicantDetailPage = () => {
 									</div>
 
 									<div className="text-xs text-[#71717A] font-medium">
-										Credits
+										Score
 									</div>
 								</CircularProgressbarWithChildren>
 							</div>
 							<div className="mt-4 text-center font-semibold">
-								Total Scores
+								Total Score
 							</div>
 						</div>
 						<div className="flex flex-col bg-white p-4 border-gray border-2">
 							<div className="text-md font-semibold text-tum-blue border-gray border-b-2 mb-2 pb-2">
 								FILE
 							</div>
-							<div className="flex flex-col space-y-4">
-								<div className="flex items-center justify-between bg-gray-100 p-3 rounded-lg border border-gray-300">
+							<div className="flex flex-col space-y-3">
+								<div className="flex items-center justify-between">
 									<label
 										htmlFor="applicantExcel"
 										className="text-tum-blue flex items-center cursor-pointer"
@@ -254,7 +263,7 @@ const ApplicantDetailPage = () => {
 										</p>
 										<MdOutlineUploadFile className="text-xl hover:scale-110 transition-transform" />
 									</label>
-									{fileUploadStatus.applicantExcel && (
+									{uploadedFiles.applicantExcel && (
 										<AiOutlineCheck className="text-green-500 text-xl" />
 									)}
 									<input
@@ -275,8 +284,7 @@ const ApplicantDetailPage = () => {
 										</span>
 									)}
 								</div>
-								\{" "}
-								<div className="flex items-center justify-between bg-gray-100 p-3 rounded-lg border border-gray-300">
+								<div className="flex items-center justify-between">
 									<label
 										htmlFor="courseDescription"
 										className="text-tum-blue flex items-center cursor-pointer"
@@ -286,7 +294,7 @@ const ApplicantDetailPage = () => {
 										</p>
 										<MdOutlineUploadFile className="text-xl hover:scale-110 transition-transform" />
 									</label>
-									{fileUploadStatus.courseDescription && (
+									{uploadedFiles.courseDescription && (
 										<AiOutlineCheck className="text-green-500 text-xl" />
 									)}
 									<input
@@ -311,12 +319,12 @@ const ApplicantDetailPage = () => {
 
 							<button
 								onClick={handleExecuteCore}
-								className={`mt-4 px-4 py-2 rounded text-white font-semibold ${
+								className={`mt-8 px-4 py-2 rounded text-white font-semibold ${
 									isExecuting
 										? "bg-gray-400 cursor-not-allowed"
 										: "bg-tum-blue hover:bg-blue-700"
 								}`}
-								disabled={isExecuting}
+								disabled={(fileUploadStatus.applicantExcel && fileUploadStatus.courseDescription) || isExecuting}
 							>
 								{isExecuting
 									? "Running Analysis..."
@@ -354,7 +362,7 @@ const ApplicantDetailPage = () => {
 										</div>
 
 										<div className="text-xs text-[#71717A] font-medium">
-											Scores
+											Score
 										</div>
 									</CircularProgressbarWithChildren>
 								</div>
@@ -368,7 +376,7 @@ const ApplicantDetailPage = () => {
 						<ModulesWithDetails
 							isOpen={isModalOpen}
 							onClose={handleCloseModal}
-							module={selectedModule}
+							module={selectedModule || {}}
 						/>
 					)}
 					<button

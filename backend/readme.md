@@ -65,6 +65,8 @@ uvicorn main:app --reload
    - **Courses**:
      - `POST /courses/`: Create a new course.
      - `GET /courses/{course_id}`: Retrieve course information by ID.
+   - **Upload File**:
+     - `POST /uplode-file/`: Upload the applicant's applicant_excel and course_description.
    - **Execute Core Logic**:
      - `POST /execute-core`: Executes the core logic defined in `core_updated.py`. This endpoint triggers the evaluation process using the OpenAI API and saves the results to a JSON file.
 

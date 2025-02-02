@@ -27,11 +27,7 @@ export const fetchCoursesByApplicantId = async (applicantId) => {
 		const response = await axios.get(
 			`${API_BASE_URL}/applicants/${applicantId}/courses`
 		);
-		if (!response.ok) {
-			throw new Error(`HTTP error! Status: ${response.status}`);
-		}
-		const data = await response.json();
-		return data;
+		return response.data;
 	} catch (error) {
 		console.error(
 			`Error fetching courses for applicant ${applicantId}:`,
@@ -53,8 +49,9 @@ export const fetchModules = async () => {
 
 export const uploadDocuments = async (applicantExcel, courseDescription) => {
 	const formData = new FormData();
-	formData.append("applicant_excel", applicantExcel);
-	formData.append("course_description", courseDescription);
+	if (applicantExcel) formData.append("applicant_excel", applicantExcel);
+	if (courseDescription)
+		formData.append("course_description", courseDescription);
 
 	try {
 		const response = await axios.post(
@@ -66,7 +63,7 @@ export const uploadDocuments = async (applicantExcel, courseDescription) => {
 		);
 		return response.data;
 	} catch (error) {
-		console.error("File upload error:", error);
+		console.error("File upload error:", error.response?.data || error);
 		throw error;
 	}
 };
