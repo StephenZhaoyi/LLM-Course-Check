@@ -1,11 +1,11 @@
 {
     "applicant_id": 0,
-    "first_name": "Max",
-    "last_name": "Mustermann",
-    "date_of_birth": "1995-08-24",
-    "nationality": "German",
-    "university": "TUM",
-    "subject": "Informatics",
-    "regular_duration": "4",
-    "number_of_credits": 120
+    "first_name": "Business",
+    "last_name": "Man",
+    "date_of_birth": "30.12.2000",
+    "nationality": "Germany",
+    "university": "Hamburg",
+    "subject": "Business Administrative",
+    "regular_duration": "6",
+    "number_of_credits": 180
 }
