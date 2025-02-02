@@ -1,6 +1,18 @@
 import React, { useState } from "react";
 import TUMLogo from "../components/Logo/TUMLogo";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, Zoom, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import OtpInput from "react-otp-input";
+
+const customToastStyle = {
+    background: "#fff",
+    color: "#333",
+    border: "1px solid #ddd",
+    borderRadius: "8px",
+    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+};
+
 
 const LoginPage = () => {
     const [email, setEmail] = useState("");
@@ -28,18 +40,18 @@ const LoginPage = () => {
                 const data = await response.json();
                 throw new Error(data.message || "Failed to send verification code.");
             }
-            alert("Verification code sent to your email!");
+            toast.success("Verification code sent to your email!", { autoClose: 3000, style: customToastStyle });
             setStep(2);
         } catch (err) {
             console.error(err);
-            setError(err.message || "Failed to send verification code.");
+            toast.error(err.message || "Failed to send verification code.", { autoClose: 3000, style: customToastStyle });
         }
     };
 
     const verifyCode = async () => {
         console.log("verifyCode triggered");
-        if (!code) {
-            setError("Please enter the verification code.");
+        if (!code || code.length !== 6) {
+            setError("Please enter a valid 6-digit code.");
             return;
         }
         setError("");
@@ -54,17 +66,28 @@ const LoginPage = () => {
                 const data = await response.json();
                 throw new Error(data.message || "Verification failed.");
             }
-            alert("Login successful!");
+            toast.success("Login successful!", { autoClose: 2000, style: customToastStyle });
             // Redirect to another page
-            navigate("/applicants");
+            setTimeout(() => navigate("/applicants"), 2000);
         } catch (err) {
             console.error(err);
-            setError(err.message || "Verification failed.");
+            toast.error(err.message || "Verification failed.", { autoClose: 3000, style: customToastStyle });
         }
     };
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-[#f5f5f5]">
+
+            <ToastContainer
+                position="top-center"
+                transition={Zoom}
+                pauseOnHover={false}
+                hideProgressBar
+                closeButton={false}
+                newestOnTop
+                draggable={false}
+                toastStyle={customToastStyle}
+            />
             {/* Top left logo, can be removed */}
             <div className="absolute top-4 left-6 z-10">
                 <TUMLogo className="w-12 h-12" />
@@ -80,6 +103,7 @@ const LoginPage = () => {
                         Courses Checker
                     </h2>
                 </div>
+
                 <div className="flex-1 flex flex-col justify-center items-center bg-white px-8">
                     <div className="w-full max-w-md text-center">
                         {step === 1 && (
@@ -90,17 +114,17 @@ const LoginPage = () => {
                                 <p className="text-gray-600 text-sm mt-2">
                                     We will send a verification code to your email.
                                 </p>
-                                <div className="mt-4">
-                                    <input
-                                        type="email"
-                                        placeholder="name@example.com"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        className={`w-full px-4 py-2 border ${error ? "border-red-500" : "border-gray-300"
-                                            } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                                    />
-                                    {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
-                                </div>
+
+                                <input
+                                    type="email"
+                                    placeholder="name@example.com"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    className={`w-full px-4 py-2 border ${error ? "border-red-500" : "border-gray-300"
+                                        } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                                />
+                                {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+
                                 <button
                                     onClick={sendVerificationCode}
                                     className="w-full bg-blue-600 text-white py-2 mt-4 rounded-md hover:bg-blue-700"
@@ -112,28 +136,47 @@ const LoginPage = () => {
                         {step === 2 && (
                             <>
                                 <h2 className="text-3xl font-semibold mt-6 text-gray-800">
-                                    Enter the verification code
+                                    Verify Your Account
                                 </h2>
                                 <p className="text-gray-600 text-sm mt-2">
-                                    Check your email for the verification code.
+                                    Insert the 5-digit code sent to your email.
                                 </p>
-                                <div className="mt-4">
-                                    <input
-                                        type="text"
-                                        placeholder="Enter verification code"
-                                        value={code}
-                                        onChange={(e) => setCode(e.target.value)}
-                                        className={`w-full px-4 py-2 border ${error ? "border-red-500" : "border-gray-300"
-                                            } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                                    />
-                                    {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
-                                </div>
+
+
+                                <OtpInput
+                                    value={code}
+                                    onChange={setCode}
+                                    numInputs={6}
+                                    isInputNum={true}
+                                    containerStyle="flex justify-center gap-2 mt-4"
+                                    inputStyle={{
+                                        width: "2.5rem",
+                                        height: "2.5rem",
+                                        borderRadius: "8px",
+                                        border: "1px solid #ddd",
+                                        textAlign: "center",
+                                        fontSize: "1.5rem",
+                                        fontWeight: "bold",
+                                    }}
+                                    renderInput={(props) => <input {...props} />}
+                                />
+
+                                {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+
                                 <button
                                     onClick={verifyCode}
-                                    className="w-full bg-blue-600 text-white py-2 mt-4 rounded-md hover:bg-blue-700"
+                                    className="w-full bg-[#0284C7] text-white py-2 mt-4 rounded-md hover:bg-[#026BA3]"
                                 >
-                                    Verify and Login
+                                    CONFIRM
                                 </button>
+
+                                {/* resend code */}
+                                <p
+                                    className="text-blue-600 text-sm mt-3 cursor-pointer hover:underline"
+                                    onClick={sendVerificationCode}
+                                >
+                                    Resend Code
+                                </p>
                             </>
                         )}
                     </div>
