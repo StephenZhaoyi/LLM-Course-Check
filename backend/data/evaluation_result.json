@@ -6,7 +6,8 @@
         "moduleCode": "INHN0001",
         "score": 6,
         "deduction_recommendation": 0,
-        "explanation_recommendation": ""
+        "explanation_recommendation": "",
+        "applicant_id": 5
     },
     "defaultCourse2": {
         "id": 2,
@@ -15,7 +16,8 @@
         "moduleCode": "INHN0002",
         "score": 6,
         "deduction_recommendation": 0,
-        "explanation_recommendation": ""
+        "explanation_recommendation": "",
+        "applicant_id": 5
     },
     "defaultCourse3": {
         "id": 3,
@@ -24,7 +26,8 @@
         "moduleCode": "INHN0003",
         "score": 8,
         "deduction_recommendation": 0,
-        "explanation_recommendation": ""
+        "explanation_recommendation": "",
+        "applicant_id": 5
     },
     "defaultCourse4": {
         "id": 4,
@@ -33,7 +36,8 @@
         "moduleCode": "INHN0006",
         "score": 6,
         "deduction_recommendation": 0,
-        "explanation_recommendation": ""
+        "explanation_recommendation": "",
+        "applicant_id": 5
     },
     "defaultCourse5": {
         "id": 5,
@@ -42,7 +46,8 @@
         "moduleCode": "INHN0007",
         "score": 6,
         "deduction_recommendation": 0,
-        "explanation_recommendation": ""
+        "explanation_recommendation": "",
+        "applicant_id": 5
     },
     "defaultCourse6": {
         "id": 6,
@@ -51,7 +56,8 @@
         "moduleCode": "INHN0008",
         "score": 6,
         "deduction_recommendation": 0,
-        "explanation_recommendation": ""
+        "explanation_recommendation": "",
+        "applicant_id": 5
     },
     "defaultCourse7": {
         "id": 7,
@@ -60,7 +66,8 @@
         "moduleCode": "INHN0011",
         "score": 6,
         "deduction_recommendation": 0,
-        "explanation_recommendation": ""
+        "explanation_recommendation": "",
+        "applicant_id": 5
     },
     "defaultCourse8": {
         "id": 8,
@@ -69,7 +76,8 @@
         "moduleCode": "INHN0012",
         "score": 6,
         "deduction_recommendation": 0,
-        "explanation_recommendation": ""
+        "explanation_recommendation": "",
+        "applicant_id": 5
     },
     "defaultCourse9": {
         "id": 9,
@@ -78,7 +86,8 @@
         "moduleCode": "INHN0013",
         "score": 6,
         "deduction_recommendation": 0,
-        "explanation_recommendation": ""
+        "explanation_recommendation": "",
+        "applicant_id": 5
     },
     "defaultCourse10": {
         "id": 10,
@@ -87,7 +96,8 @@
         "moduleCode": "INHN0016",
         "score": 6,
         "deduction_recommendation": 0,
-        "explanation_recommendation": ""
+        "explanation_recommendation": "",
+        "applicant_id": 5
     },
     "defaultCourse11": {
         "id": 11,
@@ -96,7 +106,8 @@
         "moduleCode": "INHN0018",
         "score": 8,
         "deduction_recommendation": 0,
-        "explanation_recommendation": ""
+        "explanation_recommendation": "",
+        "applicant_id": 5
     },
     "defaultCourse12": {
         "id": 12,
@@ -105,7 +116,8 @@
         "moduleCode": "INHN0017",
         "score": 6,
         "deduction_recommendation": 0,
-        "explanation_recommendation": ""
+        "explanation_recommendation": "",
+        "applicant_id": 5
     },
     "defaultCourse13": {
         "id": 13,
@@ -114,7 +126,8 @@
         "moduleCode": "INHN0019",
         "score": 5,
         "deduction_recommendation": 0,
-        "explanation_recommendation": ""
+        "explanation_recommendation": "",
+        "applicant_id": 5
     },
     "defaultCourse14": {
         "id": 14,
@@ -123,7 +136,8 @@
         "moduleCode": "INHN0004",
         "score": 8,
         "deduction_recommendation": 0,
-        "explanation_recommendation": ""
+        "explanation_recommendation": "",
+        "applicant_id": 5
     },
     "defaultCourse15": {
         "id": 15,
@@ -132,7 +146,8 @@
         "moduleCode": "INHN0009",
         "score": 8,
         "deduction_recommendation": 0,
-        "explanation_recommendation": ""
+        "explanation_recommendation": "",
+        "applicant_id": 5
     },
     "defaultCourse16": {
         "id": 16,
@@ -141,7 +156,8 @@
         "moduleCode": "INHN0014",
         "score": 8,
         "deduction_recommendation": 0,
-        "explanation_recommendation": ""
+        "explanation_recommendation": "",
+        "applicant_id": 5
     },
     "defaultCourse17": {
         "id": 17,
@@ -150,6 +166,7 @@
         "moduleCode": "INHN0020",
         "score": 6,
         "deduction_recommendation": 0,
-        "explanation_recommendation": ""
+        "explanation_recommendation": "",
+        "applicant_id": 5
     }
 }

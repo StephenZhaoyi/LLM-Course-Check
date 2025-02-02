@@ -1,5 +1,5 @@
 # models.py
-from sqlalchemy import Column, Integer, String, Date, Text, ForeignKey
+from sqlalchemy import Column, Integer, String, Date, Text, ForeignKey, Float
 from sqlalchemy.orm import relationship
 from database import Base
 
@@ -43,8 +43,8 @@ class Course(Base):
     course_name = Column(String(100), nullable=False)
     achieved_credits = Column(Integer)
     total_credits = Column(Integer)
-    score = Column(Integer)                   # ChatGPT-generated score
-    deduction_recommendation = Column(Integer) # ChatGPT’s recommended deductions
+    score = Column(Float)                   # ChatGPT-generated score
+    deduction_recommendation = Column(Float) # ChatGPT’s recommended deductions
     explanation_recommendation = Column(Text)  # ChatGPT’s explanation for the deduction
 
     # Relationships
