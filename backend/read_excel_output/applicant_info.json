@@ -1,9 +1,9 @@
 {
     "applicant_id": 0,
-    "first_name": "",
-    "last_name": "",
-    "date_of_birth": "",
-    "nationality": "",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "date_of_birth": "Date of Birth",
+    "nationality": "Nationality",
     "university": "TUM",
     "subject": "IE",
     "regular_duration": "4",

@@ -124,6 +124,11 @@ def get_course(course_id: int, db: Session = Depends(get_db)):
 
 @app.post("/execute-core/{applicant_id}")
 def execute_core(applicant_id: int, db: Session = Depends(get_db)):
+    # 1. Ensure the applicant exists before proceeding.
+    applicant = db.query(Applicant).filter(Applicant.applicant_id == applicant_id).first()
+    if not applicant:
+        raise HTTPException(status_code=404, detail="Applicant not found")
+    
     try:
         # Directly call the core functions
         reader_output = main1()
@@ -132,40 +137,42 @@ def execute_core(applicant_id: int, db: Session = Depends(get_db)):
         core_output = main2()
         print("Core Updated Output:", core_output)
         
-        # Load the evaluation JSON file
-        eval_file_path = "data1/evaluation_result.json"
+        # 2. Use a consistent file path for evaluation JSON data.
+        eval_file_path = "data/evaluation_result.json"  # Make sure this is the correct path.
         with open(eval_file_path, "r", encoding="utf-8") as file:
             evaluation_data = json.load(file)
         
-        # For every course evaluation, add the applicant_id and update the score as (ects - deduction_recommendation)
+        # Update each course in the evaluation data
         for course in evaluation_data.values():
+            # Attach the applicant id to the course data
             course["applicant_id"] = applicant_id
-            ects = course.get("ects", 0)
-            deduction = course.get("deduction_recommendation", 0)
+            # Ensure that a numeric value is used for the calculations (use 0 if missing or None)
+            ects = course.get("ects") or 0
+            deduction = course.get("deduction_recommendation") or 0
             course["score"] = ects - deduction
         
         # Write the updated JSON back to the file
         with open(eval_file_path, "w", encoding="utf-8") as file:
             json.dump(evaluation_data, file, indent=4)
         
-        # Update the Course table in the database
+        # Update or insert Course records in the database
         for course in evaluation_data.values():
             course_id = course.get("id")
-            # Attempt to find an existing course by matching course_id and applicant_id
+            # Try to locate an existing course matching the JSON id and applicant_id.
             db_course = db.query(Course).filter(
                 Course.course_id == course_id,
                 Course.applicant_id == applicant_id
             ).first()
             
             if db_course:
-                # Update existing course record with new values from evaluation_data
+                # Update the existing course record.
                 db_course.course_name = course.get("title")
                 db_course.total_credits = course.get("ects")
                 db_course.score = course.get("score")
                 db_course.deduction_recommendation = course.get("deduction_recommendation")
                 db_course.explanation_recommendation = course.get("explanation_recommendation")
             else:
-                # Create a new course record if one doesn't exist
+                # Insert a new course record.
                 new_course = Course(
                     course_name=course.get("title"),
                     total_credits=course.get("ects"),
@@ -188,6 +195,7 @@ def execute_core(applicant_id: int, db: Session = Depends(get_db)):
             }
         }
     except Exception as e:
+        db.rollback()  # Rollback the transaction if anything fails.
         raise HTTPException(status_code=500, detail=f"Execution failed: {str(e)}")
 
 @app.get("/applicants/{applicant_id}/courses", response_model=List[CourseOut])

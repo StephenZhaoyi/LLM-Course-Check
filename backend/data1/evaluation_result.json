@@ -4,90 +4,81 @@
         "title": "Introduction to Informatics",
         "ects": 6,
         "moduleCode": "INHN0001",
-        "score": 4.8,
+        "score": 0.8,
         "deduction_recommendation": 1.2,
-        "explanation_recommendation": "The applicant's course lacks content on distributed and concurrent applications and understanding of underlying programming language concepts.",
-        "applicant_id": 5
+        "explanation_recommendation": "The applicant's course covers concepts of problem, algorithm, and program, basic data structures, and object-oriented programming, which match TUM's course requirements. However, it lacks coverage on concurrent programming and threads which are part of TUM's curriculum."
     },
     "defaultCourse2": {
         "id": 2,
         "title": "Fundamentals of Programming (Exercises & Laboratory)",
         "ects": 6,
         "moduleCode": "INHN0002",
-        "score": 5.4,
+        "score": 0.9,
         "deduction_recommendation": 0.6,
-        "explanation_recommendation": "The applicant's course covers basic data structures and recursion.",
-        "applicant_id": 5
+        "explanation_recommendation": "The applicant's course covers basic data structures, recursion, and object-oriented programming, which match TUM's course. It lacks depth in concurrency and its application which TUM includes as part of this module."
     },
     "defaultCourse3": {
         "id": 3,
         "title": "Introduction to Computer Organization and Technology - Computer Architecture",
         "ects": 8,
         "moduleCode": "INHN0003",
-        "score": 4.8,
-        "deduction_recommendation": 3.2,
-        "explanation_recommendation": "The applicant's course lacks advanced topics such as parallel and distributed systems, and VHDL circuit design.",
-        "applicant_id": 5
+        "score": 0.75,
+        "deduction_recommendation": 2,
+        "explanation_recommendation": "The applicant's course covers microprocessors and basic computer architecture but lacks thorough knowledge about instruction set architectures and advanced architectural patterns like Von-Neumann architecture, which are covered at TUM."
     },
     "defaultCourse4": {
         "id": 4,
         "title": "Introduction to Software Engineering",
         "ects": 6,
         "moduleCode": "INHN0006",
-        "score": 6,
+        "score": 1.0,
         "deduction_recommendation": 0,
-        "explanation_recommendation": "The applicant's course covers project phases, reuse of components, and delivery of software.",
-        "applicant_id": 5
+        "explanation_recommendation": "The applicant's course covers system and object design, software development, testing, and engineering methods, matching all the core competencies of TUM's course."
     },
     "defaultCourse5": {
         "id": 5,
         "title": "Operating Systems and System Software",
         "ects": 6,
         "moduleCode": "INHN0007",
-        "score": 6,
+        "score": 1.0,
         "deduction_recommendation": 0,
-        "explanation_recommendation": "The applicant's course covers mutual exclusion, synchronization, concurrency models, and resource management.",
-        "applicant_id": 5
+        "explanation_recommendation": "The applicant's course covers concurrency, synchronization, and resource management which match TUM's course focus on operating systems decomposition and low-level programming."
     },
     "defaultCourse6": {
         "id": 6,
         "title": "Fundamentals of Algorithms and Data Structures",
         "ects": 6,
         "moduleCode": "INHN0008",
-        "score": 6,
+        "score": 1.0,
         "deduction_recommendation": 0,
-        "explanation_recommendation": "The applicant's course covers various sorting algorithms, priority queues, search trees, and graph algorithms.",
-        "applicant_id": 5
+        "explanation_recommendation": "The applicant's course efficiently covers data structures, algorithmic problems, hashing, sorting, which completely align with TUM's requirements."
     },
     "defaultCourse7": {
         "id": 7,
         "title": "Fundamentals of Databases",
         "ects": 6,
         "moduleCode": "INHN0011",
-        "score": 6,
+        "score": 1.0,
         "deduction_recommendation": 0,
-        "explanation_recommendation": "The applicant's course covers SQL, relational design, physical data organization, and transaction management.",
-        "applicant_id": 5
+        "explanation_recommendation": "Applicant's course covers SQL, database design, transaction management, which covers all aspects detailed in TUM's course."
     },
     "defaultCourse8": {
         "id": 8,
         "title": "Computer Networking and IT Security",
         "ects": 6,
         "moduleCode": "INHN0012",
-        "score": 6,
-        "deduction_recommendation": 0,
-        "explanation_recommendation": "The applicant's course covers OSI model, network layers, protocols, IT security basics, and encryption.",
-        "applicant_id": 5
+        "score": 0.9,
+        "deduction_recommendation": 0.6,
+        "explanation_recommendation": "The applicant's course addresses networking layers and some security protocols but does not entirely cover topics like intrusion detection and full coverage of cryptography as included in TUM's course."
     },
     "defaultCourse9": {
         "id": 9,
         "title": "Information Theory and Theoretical Informatics",
         "ects": 6,
         "moduleCode": "INHN0013",
-        "score": 6,
+        "score": 1.0,
         "deduction_recommendation": 0,
-        "explanation_recommendation": "The applicant's course covers formal languages, Chomsky hierarchy, DFAs, NP-completeness, and information theory basics.",
-        "applicant_id": 5
+        "explanation_recommendation": "The applicant's course covers formal languages, computability, decision problems, and complexity theory, matching TUM's essential topics closely."
     },
     "defaultCourse10": {
         "id": 10,
@@ -96,8 +87,7 @@
         "moduleCode": "INHN0016",
         "score": 0,
         "deduction_recommendation": 6,
-        "explanation_recommendation": "The applicant has not completed an equivalent course.",
-        "applicant_id": 5
+        "explanation_recommendation": "The applicant did not cover any signal processing content that matches TUM's course."
     },
     "defaultCourse11": {
         "id": 11,
@@ -106,8 +96,7 @@
         "moduleCode": "INHN0018",
         "score": 0,
         "deduction_recommendation": 8,
-        "explanation_recommendation": "The applicant has not completed an equivalent course.",
-        "applicant_id": 5
+        "explanation_recommendation": "There are no topics in the applicant's curriculum that intersect with TUM's cyber-physical systems prerequisites."
     },
     "defaultCourse12": {
         "id": 12,
@@ -116,8 +105,7 @@
         "moduleCode": "INHN0017",
         "score": 0,
         "deduction_recommendation": 6,
-        "explanation_recommendation": "The applicant has not completed an equivalent course.",
-        "applicant_id": 5
+        "explanation_recommendation": "No relevant topics from the applicant's courses meet the enterprise architecture concepts and methods covered in TUM's curriculum."
     },
     "defaultCourse13": {
         "id": 13,
@@ -126,47 +114,42 @@
         "moduleCode": "INHN0019",
         "score": 0,
         "deduction_recommendation": 5,
-        "explanation_recommendation": "The applicant has not completed an equivalent course.",
-        "applicant_id": 5
+        "explanation_recommendation": "The applicant's curriculum does not cover business process principles, methodologies, and IT interactions as detailed in TUM\u2019s course."
     },
     "defaultCourse14": {
         "id": 14,
         "title": "Discrete Structures",
         "ects": 8,
         "moduleCode": "INHN0004",
-        "score": 6,
+        "score": 0.75,
         "deduction_recommendation": 2,
-        "explanation_recommendation": "The applicant's course lacks some advanced topics in graph theory and algebraic basics.",
-        "applicant_id": 5
+        "explanation_recommendation": "The applicant's course covers set theory, propositional logic, and graph theory but lacks combinatorics and algebraic structures which are key components in TUM's course."
     },
     "defaultCourse15": {
         "id": 15,
         "title": "Linear Algebra",
         "ects": 8,
         "moduleCode": "INHN0009",
-        "score": 6,
+        "score": 0.75,
         "deduction_recommendation": 2,
-        "explanation_recommendation": "The applicant's course lacks advanced eigenvalue problems and scalar products.",
-        "applicant_id": 5
+        "explanation_recommendation": "The applicant's course covers matrix calculus and vector spaces but lacks comprehensive coverage of determinants, eigenvalues, and more complex linear mappings as covered at TUM."
     },
     "defaultCourse16": {
         "id": 16,
         "title": "Calculus",
         "ects": 8,
         "moduleCode": "INHN0014",
-        "score": 8,
+        "score": 1.0,
         "deduction_recommendation": 0,
-        "explanation_recommendation": "The applicant's course covers convergence, series, continuity, and differential calculus comprehensively.",
-        "applicant_id": 5
+        "explanation_recommendation": "The applicant's calculus course extensively covers differential and integral calculus, approximation methods which overlap entirely with TUM's curriculum."
     },
     "defaultCourse17": {
         "id": 17,
         "title": "Discrete Probability Theory",
         "ects": 6,
         "moduleCode": "INHN0020",
-        "score": 6,
+        "score": 1.0,
         "deduction_recommendation": 0,
-        "explanation_recommendation": "The applicant's course covers probability spaces, distributions, and statistical tests.",
-        "applicant_id": 5
+        "explanation_recommendation": "The applicant's course thoroughly covers probability spaces, distributions, and statistical applications, matching those taught in TUM's course."
     }
 }
