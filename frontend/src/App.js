@@ -3,10 +3,12 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import LoginPage from "./pages/LoginPage";
 import ApplicantListPage from "./pages/ApplicantListPage";
 import ApplicantDetailPage from "./pages/ApplicantDetailPage";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   return (
     <Router>
+      <ToastContainer position="top-right" />
       <Routes>
         {/* Default page: LoginPage */}
         <Route path="/" element={<LoginPage />} />
@@ -14,7 +16,7 @@ const App = () => {
         <Route path="/applicants" element={<ApplicantListPage />} />
         <Route path="/applicant/:id" element={<ApplicantDetailPage />} />
         {/* Handle unmatched routes, redirect to LoginPage */}
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<Navigate to="/applicants" replace />} />
       </Routes>
     </Router>
   );

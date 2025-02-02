@@ -22,7 +22,7 @@ const LoginPage = () => {
     const navigate = useNavigate();
 
     const sendVerificationCode = async () => {
-        console.log("sendVerificationCode triggered");
+        // console.log("sendVerificationCode triggered");
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             setError("Invalid email format. Please try again!");
@@ -49,7 +49,7 @@ const LoginPage = () => {
     };
 
     const verifyCode = async () => {
-        console.log("verifyCode triggered");
+        // console.log("verifyCode triggered");
         if (!code || code.length !== 6) {
             setError("Please enter a valid 6-digit code.");
             return;

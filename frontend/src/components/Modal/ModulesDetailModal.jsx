@@ -1,7 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const ModulesWithDetails = ({ isOpen, onClose, module }) => {
 	const [selectedCourse, setSelectedCourse] = useState(module.courses[0]);
+	// console.log("module", module);
+	// console.log("selectedCourse", selectedCourse);
+
+	useEffect(() => {
+		if (module?.courses?.length > 0) {
+			setSelectedCourse(module.courses[0]); // Set the first course if available
+		} else {
+			setSelectedCourse(null);
+		}
+	}, [module]);
 
 	if (!isOpen) return null;
 
@@ -24,18 +34,18 @@ const ModulesWithDetails = ({ isOpen, onClose, module }) => {
 						</h3>
 						<div className="max-h-[27rem] overflow-y-scroll">
 							{module.courses?.map((course, index) => (
-								<li
+								<div
 									key={index}
 									className={`h-12 border-gray border-b-2 cursor-pointer flex items-center px-2 overflow-x-scroll whitespace-nowrap ${
-										selectedCourse?.courseId ===
-										course.courseId
+										selectedCourse?.course_id ===
+										course.course_id
 											? "bg-tum-blue text-white"
 											: "hover:bg-tum-blue/10"
 									}`}
 									onClick={() => setSelectedCourse(course)}
 								>
-									{course.courseName}
-								</li>
+									{course.course_name}
+								</div>
 							))}
 						</div>
 					</div>
@@ -46,21 +56,23 @@ const ModulesWithDetails = ({ isOpen, onClose, module }) => {
 						</h3>
 						{selectedCourse ? (
 							<>
-								<p className="h-12 flex items-center">
+								<div className="h-12 flex items-center">
 									<p className="font-bold">
 										Deduction Recommendation:
 									</p>
 									<span className="ml-1"></span>
-									{selectedCourse.deductionRecommendation}
-								</p>
-								<p className="flex flex-col">
+									{selectedCourse.deduction_recommendation}
+								</div>
+								<div className="flex flex-col">
 									<p className="h-12 flex items-center font-bold">
 										Explanation:
 									</p>
 									<p className="max-h-[21rem] overflow-y-scroll">
-										{selectedCourse.explanationRecommendation}
+										{
+											selectedCourse.explanation_recommendation
+										}
 									</p>
-								</p>
+								</div>
 							</>
 						) : (
 							<p>No course selected.</p>
