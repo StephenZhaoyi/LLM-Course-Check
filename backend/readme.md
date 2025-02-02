@@ -57,6 +57,8 @@ uvicorn main:app --reload
    - **Applicants**:
      - `POST /applicants/`: Create a new applicant.
      - `GET /applicants/{applicant_id}`: Retrieve applicant information by ID.
+     - `GET /applicants/`: Fetch all applicants.
+     - `GET /applicants/{applicant_id}/courses`: Fetch all courses for a specific applicant.
    - **Modules**:
      - `POST /modules/`: Create a new module.
      - `GET /modules/{module_id}`: Retrieve module information by ID.

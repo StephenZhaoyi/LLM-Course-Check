@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MdOutlineUploadFile } from "react-icons/md";
 import { AiOutlineCheck } from "react-icons/ai";
 import { useParams, useNavigate } from "react-router-dom";
@@ -7,29 +7,107 @@ import ModulesWithDetails from "../components/Modal/ModulesDetailModal";
 import { buildStyles } from "react-circular-progressbar";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import mockData from "./mockdata";
+import {
+	fetchApplicantById,
+	fetchCoursesByApplicantId,
+	uploadDocuments,
+	executeCoreAnalysis,
+} from "../api";
+// import mockData from "./mockdata";
+
+const modules = [
+	{ id: 1, name: "🟦 Informatics", totalCredits: 50 },
+	{ id: 2, name: "🟪 Theoretical Informatics", totalCredits: 6 },
+	{ id: 3, name: "🟥 Cyberphysical Systems", totalCredits: 14 },
+	{ id: 4, name: "🟨 Information Systems", totalCredits: 11 },
+	{ id: 5, name: "🟩 Mathematics", totalCredits: 30 },
+];
 
 const ApplicantDetailPage = () => {
 	const { id } = useParams();
 	const navigate = useNavigate();
+	const [applicant, setApplicant] = useState(null);
+	const [courses, setCourses] = useState([]);
 
-	const modules = [
-		{ id: 1, name: "🟦 Informatics", totalCredits: 50 },
-		{ id: 2, name: "🟪 Theoretical Informatics", totalCredits: 6 },
-		{ id: 3, name: "🟥 Cyberphysical Systems", totalCredits: 14 },
-		{ id: 4, name: "🟨 Information Systems", totalCredits: 11 },
-		{ id: 5, name: "🟩 Mathematics", totalCredits: 30 },
-	];
+	useEffect(() => {
+		const loadApplicantData = async () => {
+			try {
+				const applicantData = await fetchApplicantById(id);
+				setApplicant(applicantData);
+			} catch (error) {
+				console.error("Error fetching applicant:", error);
+			}
+		};
+		const loadCourses = async () => {
+			try {
+				const coursesData = await fetchCoursesByApplicantId(id);
+				if (!coursesData || coursesData.length === 0) {
+					console.warn("No courses found for this applicant.");
+				}
+				console.log(
+					"Fetched courses:",
+					JSON.stringify(coursesData, null, 2)
+				);
+				setCourses(coursesData);
+			} catch (error) {
+				console.error("Error fetching courses:", error);
+			}
+		};
+		loadApplicantData();
+		loadCourses();
+	}, [id]);
 
+	const [fileUploadStatus, setFileUploadStatus] = useState({
+		applicantExcel: false,
+		courseDescription: false,
+	});
+	const [isUploading, setIsUploading] = useState(false);
+	const [isExecuting, setIsExecuting] = useState(false);
+	const handleFileUpload = async (e, fileType) => {
+		const file = e.target.files[0];
+		if (!file) return;
+
+		setIsUploading(true);
+		try {
+			console.log(`Uploading ${fileType}:`, file.name);
+
+			const applicantExcel = fileType === "applicantExcel" ? file : null;
+			const courseDescription =
+				fileType === "courseDescription" ? file : null;
+
+			await uploadDocuments(applicantExcel, courseDescription);
+			console.log("File uploaded successfully!");
+
+			setFileUploadStatus((prevStatus) => ({
+				...prevStatus,
+				[fileType]: true,
+			}));
+		} catch (error) {
+			console.error("File upload failed:", error);
+		} finally {
+			setIsUploading(false);
+		}
+	};
+
+	const handleExecuteCore = async () => {
+		setIsExecuting(true);
+		try {
+			console.log("Running core analysis...");
+			await executeCoreAnalysis();
+			console.log("Analysis completed successfully!");
+			alert("Analysis completed successfully!");
+		} catch (error) {
+			console.error("Analysis failed:", error);
+			alert("Analysis failed!");
+		} finally {
+			setIsExecuting(false);
+		}
+	};
+
+	// test data
+	console.log("applicant", applicant);
+	console.log("courses", courses);
 	const TOTAL_CREDITS = 111;
-
-	const applicant = mockData.applicants.find(
-		(applicant) => applicant.applicantId.toString() === id
-	);
-
-	const courses = mockData.courses.filter(
-		(course) => course.applicantId.toString() === id
-	);
 
 	if (!applicant) {
 		return (
@@ -49,30 +127,27 @@ const ApplicantDetailPage = () => {
 		);
 	}
 
-	const {
-		firstName,
-		lastName,
-		nationality,
-		submissionDate,
-		submissionTime,
-	} = applicant;
-
 	// Map modules to include achieved and total credits based on courses
 	const modulesWithAchievedCredits = modules.map((module) => {
-		const moduleCourses = Array.isArray(courses)
-			? courses.filter((course) => course.moduleId === module.id)
-			: [];
+		const moduleCourses = courses.filter(
+			(course) => course.module_id === module.id
+		);
 
 		const achievedCredits = moduleCourses.reduce(
-			(sum, course) => sum + (course.achievedCredits || 0),
+			(sum, course) => sum + (course.achieved_credits || 0),
 			0
 		);
 
-		return { ...module, achieved: achievedCredits };
+		const totalScore = moduleCourses.reduce(
+			(sum, course) => sum + (course.score || 0),
+			0
+		);
+
+		return { ...module, achieved: achievedCredits, score: totalScore };
 	});
 
 	const totalAchievedCredits = modulesWithAchievedCredits.reduce(
-		(sum, module) => sum + module.achieved,
+		(sum, module) => sum + module.score,
 		0
 	);
 
@@ -94,28 +169,12 @@ const ApplicantDetailPage = () => {
 		setSelectedModule(null);
 	};
 
-	const [fileUploadStatus, setFileUploadStatus] = useState({
-		curricularAnalysis: false,
-		modularDescription: false,
-	});
-
-	const handleFileUpload = (e, fileType) => {
-		const file = e.target.files[0];
-		if (file) {
-			console.log(`Uploaded ${fileType}:`, file.name);
-			setFileUploadStatus((prevStatus) => ({
-				...prevStatus,
-				[fileType]: true,
-			}));
-		}
-	};
-
 	if (applicant) {
 		return (
 			<Layout>
 				<div className="flex flex-col max-h-screen bg-gray-50 mt-12 p-8">
 					<div className="text-xl font-semibold text-tum-blue mb-6 border-b-[0.2rem] border-tum-blue pb-2">
-						{id} - {firstName} {lastName}
+						{id} - {applicant?.first_name} {applicant?.last_name}
 					</div>
 
 					<div className="grid grid-cols-3 gap-6 mb-6 bg-[#EEEEEE] p-6 h-[16rem]">
@@ -126,21 +185,21 @@ const ApplicantDetailPage = () => {
 							<div className="grid gap-y-3">
 								<p className="flex flex-row">
 									<p className="font-medium mr-2">
-										Submission Date:
+										Date of Birth
 									</p>
-									{submissionDate}
+									{applicant.applicantDateOfBirth}
 								</p>
 								<p className="flex flex-row">
 									<p className="font-medium mr-2">
 										Submission Time:
 									</p>
-									{submissionTime}
+									{applicant.submissionTime}
 								</p>
 								<p className="flex flex-row">
 									<p className="font-medium mr-2">
 										Nationality:
 									</p>{" "}
-									{nationality}
+									{applicant.nationality}
 								</p>
 								<p className="flex flex-row align-center">
 									<p className="font-medium mr-2">Score:</p>
@@ -184,59 +243,85 @@ const ApplicantDetailPage = () => {
 							<div className="text-md font-semibold text-tum-blue border-gray border-b-2 mb-2 pb-2">
 								FILE
 							</div>
-							<ul>
-								<li className="mb-2">
+							<div className="flex flex-col space-y-4">
+								<div className="flex items-center justify-between bg-gray-100 p-3 rounded-lg border border-gray-300">
 									<label
-										htmlFor="curricularAnalysis"
-										className="text-tum-blue flex items-center"
+										htmlFor="applicantExcel"
+										className="text-tum-blue flex items-center cursor-pointer"
 									>
-										<p>Curricular Analysis</p>
-										<span className="ml-2 hover:cursor-pointer">
-											<MdOutlineUploadFile />
-										</span>
-										{fileUploadStatus.curricularAnalysis && (
-											<span className="ml-2 text-green-500">
-												<AiOutlineCheck />
-											</span>
-										)}
+										<p className="mr-3 font-medium">
+											Curricular Analysis
+										</p>
+										<MdOutlineUploadFile className="text-xl hover:scale-110 transition-transform" />
 									</label>
+									{fileUploadStatus.applicantExcel && (
+										<AiOutlineCheck className="text-green-500 text-xl" />
+									)}
 									<input
-										id="curricularAnalysis"
+										id="applicantExcel"
 										type="file"
 										accept="application/pdf"
 										className="hidden"
 										onChange={(e) =>
 											handleFileUpload(
 												e,
-												"curricularAnalysis"
+												"applicantExcel"
 											)
 										}
 									/>
-								</li>
-								<li>
-									<label
-										htmlFor="modularDescription"
-										className="text-tum-blue flex items-center"
-									>
-										<p>Modular Description</p>
-										<span className="ml-2 hover:cursor-pointer">
-											<MdOutlineUploadFile />
+									{isUploading && (
+										<span className="text-tum-blue font-semibold">
+											Uploading...
 										</span>
-										{fileUploadStatus.modularDescription && (
-											<span className="ml-2 text-green-500">
-												<AiOutlineCheck />
-											</span>
-										)}
+									)}
+								</div>
+								\{" "}
+								<div className="flex items-center justify-between bg-gray-100 p-3 rounded-lg border border-gray-300">
+									<label
+										htmlFor="courseDescription"
+										className="text-tum-blue flex items-center cursor-pointer"
+									>
+										<p className="mr-3 font-medium">
+											Modular Description
+										</p>
+										<MdOutlineUploadFile className="text-xl hover:scale-110 transition-transform" />
 									</label>
+									{fileUploadStatus.courseDescription && (
+										<AiOutlineCheck className="text-green-500 text-xl" />
+									)}
 									<input
-										id="modularDescription"
+										id="courseDescription"
 										type="file"
 										accept="application/pdf"
 										className="hidden"
-										onChange={(e) => handleFileUpload(e, "modularDescription")}
+										onChange={(e) =>
+											handleFileUpload(
+												e,
+												"courseDescription"
+											)
+										}
 									/>
-								</li>
-							</ul>
+									{isUploading && (
+										<span className="text-tum-blue font-semibold">
+											Uploading...
+										</span>
+									)}
+								</div>
+							</div>
+
+							<button
+								onClick={handleExecuteCore}
+								className={`mt-4 px-4 py-2 rounded text-white font-semibold ${
+									isExecuting
+										? "bg-gray-400 cursor-not-allowed"
+										: "bg-tum-blue hover:bg-blue-700"
+								}`}
+								disabled={isExecuting}
+							>
+								{isExecuting
+									? "Running Analysis..."
+									: "Run Analysis"}
+							</button>
 						</div>
 					</div>
 
