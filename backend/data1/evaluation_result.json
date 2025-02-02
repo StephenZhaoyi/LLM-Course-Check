@@ -1,0 +1,172 @@
+{
+    "defaultCourse1": {
+        "id": 1,
+        "title": "Introduction to Informatics",
+        "ects": 6,
+        "moduleCode": "INHN0001",
+        "score": 4.8,
+        "deduction_recommendation": 1.2,
+        "explanation_recommendation": "The applicant's course lacks content on distributed and concurrent applications and understanding of underlying programming language concepts.",
+        "applicant_id": 5
+    },
+    "defaultCourse2": {
+        "id": 2,
+        "title": "Fundamentals of Programming (Exercises & Laboratory)",
+        "ects": 6,
+        "moduleCode": "INHN0002",
+        "score": 5.4,
+        "deduction_recommendation": 0.6,
+        "explanation_recommendation": "The applicant's course covers basic data structures and recursion.",
+        "applicant_id": 5
+    },
+    "defaultCourse3": {
+        "id": 3,
+        "title": "Introduction to Computer Organization and Technology - Computer Architecture",
+        "ects": 8,
+        "moduleCode": "INHN0003",
+        "score": 4.8,
+        "deduction_recommendation": 3.2,
+        "explanation_recommendation": "The applicant's course lacks advanced topics such as parallel and distributed systems, and VHDL circuit design.",
+        "applicant_id": 5
+    },
+    "defaultCourse4": {
+        "id": 4,
+        "title": "Introduction to Software Engineering",
+        "ects": 6,
+        "moduleCode": "INHN0006",
+        "score": 6,
+        "deduction_recommendation": 0,
+        "explanation_recommendation": "The applicant's course covers project phases, reuse of components, and delivery of software.",
+        "applicant_id": 5
+    },
+    "defaultCourse5": {
+        "id": 5,
+        "title": "Operating Systems and System Software",
+        "ects": 6,
+        "moduleCode": "INHN0007",
+        "score": 6,
+        "deduction_recommendation": 0,
+        "explanation_recommendation": "The applicant's course covers mutual exclusion, synchronization, concurrency models, and resource management.",
+        "applicant_id": 5
+    },
+    "defaultCourse6": {
+        "id": 6,
+        "title": "Fundamentals of Algorithms and Data Structures",
+        "ects": 6,
+        "moduleCode": "INHN0008",
+        "score": 6,
+        "deduction_recommendation": 0,
+        "explanation_recommendation": "The applicant's course covers various sorting algorithms, priority queues, search trees, and graph algorithms.",
+        "applicant_id": 5
+    },
+    "defaultCourse7": {
+        "id": 7,
+        "title": "Fundamentals of Databases",
+        "ects": 6,
+        "moduleCode": "INHN0011",
+        "score": 6,
+        "deduction_recommendation": 0,
+        "explanation_recommendation": "The applicant's course covers SQL, relational design, physical data organization, and transaction management.",
+        "applicant_id": 5
+    },
+    "defaultCourse8": {
+        "id": 8,
+        "title": "Computer Networking and IT Security",
+        "ects": 6,
+        "moduleCode": "INHN0012",
+        "score": 6,
+        "deduction_recommendation": 0,
+        "explanation_recommendation": "The applicant's course covers OSI model, network layers, protocols, IT security basics, and encryption.",
+        "applicant_id": 5
+    },
+    "defaultCourse9": {
+        "id": 9,
+        "title": "Information Theory and Theoretical Informatics",
+        "ects": 6,
+        "moduleCode": "INHN0013",
+        "score": 6,
+        "deduction_recommendation": 0,
+        "explanation_recommendation": "The applicant's course covers formal languages, Chomsky hierarchy, DFAs, NP-completeness, and information theory basics.",
+        "applicant_id": 5
+    },
+    "defaultCourse10": {
+        "id": 10,
+        "title": "Introduction to Signal Processing",
+        "ects": 6,
+        "moduleCode": "INHN0016",
+        "score": 0,
+        "deduction_recommendation": 6,
+        "explanation_recommendation": "The applicant has not completed an equivalent course.",
+        "applicant_id": 5
+    },
+    "defaultCourse11": {
+        "id": 11,
+        "title": "Foundations of Cyber-Physical Systems",
+        "ects": 8,
+        "moduleCode": "INHN0018",
+        "score": 0,
+        "deduction_recommendation": 8,
+        "explanation_recommendation": "The applicant has not completed an equivalent course.",
+        "applicant_id": 5
+    },
+    "defaultCourse12": {
+        "id": 12,
+        "title": "Enterprise Architecture Management and Reference Models",
+        "ects": 6,
+        "moduleCode": "INHN0017",
+        "score": 0,
+        "deduction_recommendation": 6,
+        "explanation_recommendation": "The applicant has not completed an equivalent course.",
+        "applicant_id": 5
+    },
+    "defaultCourse13": {
+        "id": 13,
+        "title": "Business Process Management",
+        "ects": 5,
+        "moduleCode": "INHN0019",
+        "score": 0,
+        "deduction_recommendation": 5,
+        "explanation_recommendation": "The applicant has not completed an equivalent course.",
+        "applicant_id": 5
+    },
+    "defaultCourse14": {
+        "id": 14,
+        "title": "Discrete Structures",
+        "ects": 8,
+        "moduleCode": "INHN0004",
+        "score": 6,
+        "deduction_recommendation": 2,
+        "explanation_recommendation": "The applicant's course lacks some advanced topics in graph theory and algebraic basics.",
+        "applicant_id": 5
+    },
+    "defaultCourse15": {
+        "id": 15,
+        "title": "Linear Algebra",
+        "ects": 8,
+        "moduleCode": "INHN0009",
+        "score": 6,
+        "deduction_recommendation": 2,
+        "explanation_recommendation": "The applicant's course lacks advanced eigenvalue problems and scalar products.",
+        "applicant_id": 5
+    },
+    "defaultCourse16": {
+        "id": 16,
+        "title": "Calculus",
+        "ects": 8,
+        "moduleCode": "INHN0014",
+        "score": 8,
+        "deduction_recommendation": 0,
+        "explanation_recommendation": "The applicant's course covers convergence, series, continuity, and differential calculus comprehensively.",
+        "applicant_id": 5
+    },
+    "defaultCourse17": {
+        "id": 17,
+        "title": "Discrete Probability Theory",
+        "ects": 6,
+        "moduleCode": "INHN0020",
+        "score": 6,
+        "deduction_recommendation": 0,
+        "explanation_recommendation": "The applicant's course covers probability spaces, distributions, and statistical tests.",
+        "applicant_id": 5
+    }
+}

@@ -11,6 +11,8 @@ from schemas import (
     ModuleCreate, ModuleOut,
     CourseCreate, CourseOut
 )
+from reader_excel import main as main1
+from core_updated import main as main2
 import subprocess
 import json
 
@@ -120,17 +122,73 @@ def get_course(course_id: int, db: Session = Depends(get_db)):
     )
     return course_out
 
-@app.post("/execute-core")
-def execute_core():
+@app.post("/execute-core/{applicant_id}")
+def execute_core(applicant_id: int, db: Session = Depends(get_db)):
     try:
-        # First, execute the reader_excel.py script
-        reader_result = subprocess.run(["python", "backend/reader_excel.py"], check=True, capture_output=True, text=True)
-        print("Reader Excel Output:", reader_result.stdout)
-        # Execute the core_updated.py script
-        result = subprocess.run(["python", "core_updated.py"], check=True, capture_output=True, text=True)
-        return {"status": "success", "output": result.stdout}
-    except subprocess.CalledProcessError as e:
-        raise HTTPException(status_code=500, detail=f"Execution failed: {e.stderr}")
+        # Directly call the core functions
+        reader_output = main1()
+        print("Reader Excel Output:", reader_output)
+        
+        core_output = main2()
+        print("Core Updated Output:", core_output)
+        
+        # Load the evaluation JSON file
+        eval_file_path = "data1/evaluation_result.json"
+        with open(eval_file_path, "r", encoding="utf-8") as file:
+            evaluation_data = json.load(file)
+        
+        # For every course evaluation, add the applicant_id and update the score as (ects - deduction_recommendation)
+        for course in evaluation_data.values():
+            course["applicant_id"] = applicant_id
+            ects = course.get("ects", 0)
+            deduction = course.get("deduction_recommendation", 0)
+            course["score"] = ects - deduction
+        
+        # Write the updated JSON back to the file
+        with open(eval_file_path, "w", encoding="utf-8") as file:
+            json.dump(evaluation_data, file, indent=4)
+        
+        # Update the Course table in the database
+        for course in evaluation_data.values():
+            course_id = course.get("id")
+            # Attempt to find an existing course by matching course_id and applicant_id
+            db_course = db.query(Course).filter(
+                Course.course_id == course_id,
+                Course.applicant_id == applicant_id
+            ).first()
+            
+            if db_course:
+                # Update existing course record with new values from evaluation_data
+                db_course.course_name = course.get("title")
+                db_course.total_credits = course.get("ects")
+                db_course.score = course.get("score")
+                db_course.deduction_recommendation = course.get("deduction_recommendation")
+                db_course.explanation_recommendation = course.get("explanation_recommendation")
+            else:
+                # Create a new course record if one doesn't exist
+                new_course = Course(
+                    course_name=course.get("title"),
+                    total_credits=course.get("ects"),
+                    score=course.get("score"),
+                    deduction_recommendation=course.get("deduction_recommendation"),
+                    explanation_recommendation=course.get("explanation_recommendation"),
+                    applicant_id=applicant_id,
+                    module_id=None,
+                    achieved_credits=None
+                )
+                db.add(new_course)
+        
+        db.commit()
+        
+        return {
+            "status": "success",
+            "output": {
+                "reader": reader_output,
+                "core": core_output
+            }
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Execution failed: {str(e)}")
 
 @app.get("/applicants/{applicant_id}/courses", response_model=List[CourseOut])
 def get_courses_for_applicant(applicant_id: int, db: Session = Depends(get_db)):

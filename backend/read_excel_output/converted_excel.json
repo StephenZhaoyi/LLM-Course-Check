@@ -1,0 +1,145 @@
+{
+    "Informatics": {
+        "Introduction to Informatics": {
+            "ects at TUM": 6,
+            "applicant's courses": [
+                {
+                    "course": "Introduction to Programming (INF-EiP)",
+                    "ects": 9
+                }
+            ]
+        },
+        "Fundamentals of Programming (Exercises & Laboratory)": {
+            "ects at TUM": 6,
+            "applicant's courses": [
+                {
+                    "course": "Programming and Modeling (INF-ProMo)",
+                    "ects": 6
+                }
+            ]
+        },
+        "Introduction to Computer Organization and Technology-Computer Architecture": {
+            "ects at TUM": 8,
+            "applicant's courses": [
+                {
+                    "course": "Computer Architecture (INF-RA)",
+                    "ects": 6
+                }
+            ]
+        },
+        "Introduction to Software Engineering": {
+            "ects at TUM": 6,
+            "applicant's courses": [
+                {
+                    "course": "Software Engineering (INF-SWT)",
+                    "ects": 6
+                }
+            ]
+        },
+        "Operating Systems and System Software": {
+            "ects at TUM": 6,
+            "applicant's courses": [
+                {
+                    "course": "Operating Systems (INF-BS)",
+                    "ects": 6
+                }
+            ]
+        },
+        "Fundamentals of Algorithms and Data Structures": {
+            "ects at TUM": 6,
+            "applicant's courses": [
+                {
+                    "course": "Algorithms and Data Structures (INF-AlDs)",
+                    "ects": 6
+                }
+            ]
+        },
+        "Fundamentals of Databases": {
+            "ects at TUM": 6,
+            "applicant's courses": [
+                {
+                    "course": "Database Systems I (INF-DBSI)",
+                    "ects": 6
+                }
+            ]
+        },
+        "Computer Networking and IT security": {
+            "ects at TUM": 6,
+            "applicant's courses": [
+                {
+                    "course": "Computer Networks and Distributed Systems (INF-RVS)",
+                    "ects": 6
+                }
+            ]
+        }
+    },
+    "Theoretical Informatics": {
+        "Information Theory and Theoretical Informatics": {
+            "ects at TUM": 6,
+            "applicant's courses": [
+                {
+                    "course": "Formal Languages and Complexity Theory (INF-FSK)",
+                    "ects": 6
+                }
+            ]
+        }
+    },
+    "Cyberphysical Systems": {
+        "Introduction to Signal Processing": {
+            "ects at TUM": 6,
+            "applicant's courses": []
+        },
+        "Foundations of Cyber-Physical Systems": {
+            "ects at TUM": 8,
+            "applicant's courses": []
+        }
+    },
+    "Information Systems": {
+        "Enterprise Architecture Management and Reference Models": {
+            "ects at TUM": 6,
+            "applicant's courses": []
+        },
+        "Business Process": {
+            "ects at TUM": 5,
+            "applicant's courses": []
+        }
+    },
+    "Mathematics": {
+        "Discrete Structures": {
+            "ects at TUM": 8,
+            "applicant's courses": [
+                {
+                    "course": "Logic and Discrete Structures (INF-LDS)",
+                    "ects": 6
+                }
+            ]
+        },
+        "Linear Algebra": {
+            "ects at TUM": 8,
+            "applicant's courses": [
+                {
+                    "course": "Linear Algebra for Computer Scientists (MA-LinAlgICS)",
+                    "ects": 6
+                }
+            ]
+        },
+        "Calculus": {
+            "ects at TUM": 8,
+            "applicant's courses": [
+                {
+                    "course": "Analysis for Computer Scientists and Statisticians (MA-AnIS)",
+                    "ects": 9
+                }
+            ]
+        },
+        "Discrete Probability": {
+            "ects at TUM": 6,
+            "applicant's courses": [
+                {
+                    "course": "Introduction to Probability Calculus and Inductive Statistics (STAT-EWIDS)",
+                    "ects": 8
+                }
+            ]
+        }
+    }
+}
