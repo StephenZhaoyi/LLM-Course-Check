@@ -59,6 +59,19 @@ def list_all_applicants(db: Session = Depends(get_db)):
     applicants = db.query(Applicant).all()
     return applicants
 
+@app.put("/applicants/{applicant_id}/update-score")
+def update_applicant_score(applicant_id: int, score: int, db: Session = Depends(get_db)):
+    db_applicant = db.query(Applicant).filter(Applicant.applicant_id == applicant_id).first()
+    
+    if not db_applicant:
+        raise HTTPException(status_code=404, detail="Applicant not found")
+
+    db_applicant.score = score
+    db.commit()
+    db.refresh(db_applicant)
+
+    return {"status": "success", "message": "Applicant score updated", "new_score": db_applicant.score}
+
 
 # ------------------------------
 # MODULES
