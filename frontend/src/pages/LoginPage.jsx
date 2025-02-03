@@ -139,7 +139,7 @@ const LoginPage = () => {
                                     Verify Your Account
                                 </h2>
                                 <p className="text-gray-600 text-sm mt-2">
-                                    Insert the 5-digit code sent to your email.
+                                    Insert the 6-digit code sent to your email.
                                 </p>
 
 
