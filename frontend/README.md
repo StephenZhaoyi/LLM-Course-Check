@@ -92,6 +92,10 @@ The frontend interacts with a **FastAPI backend** to fetch and update applicant 
 │
 ├── 📂 utils/             # Utility functions/helpers (future use)
 │
+├── 📂 .github/workflows/ # CI/CD workflows
+│   ├── preview.yaml      # Preview deployment workflow
+│   ├── production.yaml   # Production deployment workflow
+│
 ├── 📜 package.json       
 │
 ├── 📜 tailwind.config.js
