@@ -50,12 +50,54 @@ The frontend interacts with a **FastAPI backend** to fetch and update applicant 
 ## 📂 Project Structure
 ```
 📂 src/
- ┣ 📜 api.js              # API requests (Axios)
- ┣ 📂 components/        # Reusable UI components
- ┣ 📂 pages/             # Main pages (ApplicantList, ApplicantDetail)
- ┣ 📜 App.js             # Main App component
- ┣ 📜 index.js           # Entry point
- ┗ 📜 routes.js          # React Router configuration
+├── 📜 App.js             # Main App component
+├── 📜 index.js           # Entry point of the application
+├── 📜 api.js             # API requests (Axios)
+├── 📜 index.css          # Global CSS styles
+├── 📜 App.css            # App-wide styles
+│
+├── 📂 assets/            # Static assets (logos, images)
+│   └── 📜 tum-logo.svg   # TUM Logo
+│
+├── 📂 components/        # Reusable UI components
+│   ├── 📂 Layout/        # Main layout components
+│   │   ├── 📜 Layout.jsx     # Main layout wrapper
+│   │   ├── 📜 Navbar.jsx     # Top navigation bar
+│   │   └── 📜 Sidebar.jsx    # Sidebar menu
+│   │
+│   ├── 📂 Logo/          # Branding and logos
+│   │   └── 📜 TUMLogo.jsx     # TUM logo component
+│   │
+│   ├── 📂 Modal/         # Modal components
+│   │   └── 📜 ModulesDetailModal.jsx  # Modal for viewing module details
+│   │
+│   ├── 📂 Pagination/    # Pagination UI components
+│   │   ├── 📜 Pagination.jsx          # Pagination logic
+│   │   └── 📜 Pagination.stories.jsx  # Storybook for Pagination component
+│
+├── 📂 controllers/       # Business logic controllers (future use)
+│
+├── 📂 hooks/             # Custom React hooks (future use)
+│
+├── 📂 pages/             # Main page components
+│   ├── 📜 ApplicantDetailPage.jsx     # Applicant details view
+│   ├── 📜 ApplicantListPage.jsx       # Applicant list view
+│   ├── 📜 ApplicantListPage.stories.jsx # Storybook for list page
+│   ├── 📜 LoginPage.jsx                # Login view
+│   └── 📜 mockdata.jsx                  # Mock data for testing
+│
+├── 📂 routes/            # React Router configuration (future use)
+│
+├── 📂 services/          # API services and business logic (future use)
+│
+├── 📂 utils/             # Utility functions/helpers (future use)
+│
+├── 📜 package.json       
+│
+├── 📜 tailwind.config.js
+│
+└── 📜 eslint.config.mjs
+
 ```
 
 ---
@@ -86,6 +128,9 @@ The frontend interacts with a **FastAPI backend** to fetch and update applicant 
 - **Axios** (API calls)
 - **React Toastify** (Notifications)
 - **Circular Progress Bar** (Score visualization)
+- **Husky** (Pre-commit hooks for code quality)
+- **ESLint** (Code linting to enforce best practices)
+- **Prettier** (Code formatting)
 
 ---
 
@@ -106,7 +151,8 @@ The frontend interacts with a **FastAPI backend** to fetch and update applicant 
 ---
 
 ## 👨‍💻 Contributors
-- 
+- Ray TANG
+- TsaiChen LO
 
 ---
 
